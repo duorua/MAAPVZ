@@ -278,7 +278,6 @@ jobs:
           git cliff --latest --context | jq '.version' || echo "获取上下文失败"
 
   release:
-    if: ${{ needs.meta.outputs.is_release == 'true'}}
     needs: [meta, install, changelog]
     runs-on: ubuntu-latest
     steps:
