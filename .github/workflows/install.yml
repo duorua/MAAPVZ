@@ -266,7 +266,7 @@ jobs:
 
       - name: Debug git-cliff context (latest tag info)
         run: |
-          # 查看所有标签的排序（语义化版本）
+          # 查看所有标签的排序
           git tag -l --sort=-v:refname
           # 查看 --latest 到底选中了哪个标签
           git cliff --latest --context | jq '.version' || echo "获取上下文失败"
