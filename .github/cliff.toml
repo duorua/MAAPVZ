@@ -87,8 +87,6 @@ commit_parsers = [
     { message = "^revert", group = "<!-- 10 -->◀️ 撤销" },
 ]
 
-topo_order = false
-
 # 忽略这些提交
 ignore_tags = "rc"
 
