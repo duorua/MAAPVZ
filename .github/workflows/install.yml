@@ -255,7 +255,7 @@ jobs:
         with:
           config: .github/cliff.toml
           args: >-
-            -vv ${{ github.ref_name }} --strip header
+            -vv --latest --strip header
         env:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
