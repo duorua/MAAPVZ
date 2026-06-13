@@ -93,7 +93,7 @@ topo_order = false
 ignore_tags = "rc"
 
 # 排序规则
-sort_commits = "newest"
+sort_commits = "oldest"
 
 # 启用GitHub集成
 [git.github]
