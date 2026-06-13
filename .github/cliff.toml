@@ -87,6 +87,7 @@ commit_parsers = [
     { message = "^revert", group = "<!-- 10 -->◀️ 撤销" },
 ]
 
+sort_commits = "newest"
 topo_order = false
 
 # 忽略这些提交

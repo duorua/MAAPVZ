@@ -254,8 +254,11 @@ jobs:
         id: git-cliff
         with:
           config: .github/cliff.toml
+          # 正式版：使用 tag-pattern 只匹配正式版标签，包含所有从上一个正式版以来的提交
+          # 预发布版：正常生成，只包含从上一个标签以来的提交
           args: >-
             -vv --latest --strip header
+            ${{ needs.meta.outputs.is_prerelease == 'false' && '--tag-pattern "^v[0-9]+\\.[0-9]+\\.[0-9]+$"' || '' }}
         env:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
@@ -275,7 +278,7 @@ jobs:
           git cliff --latest --context | jq '.version' || echo "获取上下文失败"
 
   release:
-    if: ${{ needs.meta.outputs.is_release == 'true'|| needs.meta.outputs.is_prerelease == 'true' }}
+    if: ${{ needs.meta.outputs.is_release == 'true'}}
     needs: [meta, install, changelog]
     runs-on: ubuntu-latest
     steps:
