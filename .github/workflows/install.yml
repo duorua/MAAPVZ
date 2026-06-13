@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'           # 监听所有以 v 开头的标签推送
   workflow_dispatch:
 
 env:
@@ -286,10 +288,6 @@ jobs:
           echo "is_release: ${{ needs.meta.outputs.is_release }}"
           echo "is_prerelease: ${{ needs.meta.outputs.is_prerelease }}"
           echo "tag: ${{ needs.meta.outputs.tag }}"
-      
-      - uses: actions/download-artifact@v4
-        with:
-          path: assets
 
       - uses: actions/download-artifact@v4
         with:
