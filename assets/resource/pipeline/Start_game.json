@@ -12,6 +12,15 @@
             "点击登录"
         ]
     },
+    "打开pvz_联想": {
+        "timeout": 180000,
+        "action": "StartApp",
+        "package": "com.popcap.pvz2cthdlx",
+        "post_delay": 16000,
+        "next": [
+            "点击登录"
+        ]
+    },
     "打开pvz_360": {
         "timeout": 180000,
         "action": "StartApp",
@@ -153,6 +162,15 @@
             "打开pvz_华为"
         ]
     },
+    "关闭pvz_联想": {
+        "enabled": false,
+        "timeout": 180000,
+        "action": "StopApp",
+        "package": "com.popcap.pvz2cthdlx",
+        "next": [
+            "打开pvz_联想"
+        ]
+    },
     "关闭pvz_360": {
         "enabled": false,
         "timeout": 180000,
@@ -286,7 +304,7 @@
             {
                 "recognition": "TemplateMatch",
                 "template": [
-                    "点击登录_应用宝_微信.png"
+                    "Start_game/点击登录_应用宝_微信.png"
                 ],
                 "threshold": 0.8
             },
@@ -321,7 +339,7 @@
             {
                 "recognition": "TemplateMatch",
                 "template": [
-                    "点击登录_应用宝_qq.png"
+                    "Start_game/点击登录_应用宝_qq.png"
                 ],
                 "threshold": 0.8
             },
@@ -353,8 +371,8 @@
         "timeout": 30000,
         "recognition": "TemplateMatch",
         "template": [
-            "登录_4399.png",
-            "登录_XM.png"
+            "Start_game/登录_4399.png",
+            "Start_game/登录_XM.png"
         ],
         "threshold": 0.8,
         "action": "Click",
@@ -372,8 +390,8 @@
             {
                 "recognition": "TemplateMatch",
                 "template": [
-                    "登录_4399.png",
-                    "登录_XM.png"
+                    "Start_game/登录_4399.png",
+                    "Start_game/登录_XM.png"
                 ],
                 "threshold": 0.8
             },
@@ -433,7 +451,7 @@
         "timeout": 15000,
         "recognition": "TemplateMatch",
         "template": [
-            "小米进入游戏时的广告叉.png"
+            "Start_game/小米进入游戏时的广告叉.png"
         ],
         "action": "Click",
         "post_delay": 10000,
@@ -446,7 +464,7 @@
         "timeout": 15000,
         "recognition": "TemplateMatch",
         "template": [
-            "小米里的绑定账号_下次再说.png"
+            "Start_game/小米里的绑定账号_下次再说.png"
         ],
         "action": "Click",
         "post_delay": 10000,
@@ -460,11 +478,13 @@
         "timeout": 3000,
         "recognition": "TemplateMatch",
         "template": [
-            "开始游戏.png"
+            "Start_game/开始游戏.png"
         ],
         "action": "Click",
         "post_delay": 10000,
+        "focus": "点击开始游戏",
         "next": [
+            "开始游戏",
             "使用云端进度",
             "关闭公告"
         ]
@@ -473,7 +493,7 @@
         "timeout": 3000,
         "recognition": "TemplateMatch",
         "template": [
-            "使用云端进度.png"
+            "Start_game/使用云端进度.png"
         ],
         "action": "Click",
         "next": [
@@ -485,39 +505,37 @@
         "timeout": 40000,
         "recognition": "TemplateMatch",
         "template": [
-            "覆盖存档_确定.png"
+            "Start_game/覆盖存档_确定.png"
         ],
         "action": "Click",
         "post_delay": 10000,
         "next": [
-            "关闭公告"
+            "关闭公告",
+            "使用云端进度"
         ]
     },
     "关闭公告": {
         "timeout": 6000,
         "recognition": "TemplateMatch",
         "template": [
-            "叉叉.png",
-            "公告的叉叉.png",
-            "僵尸清除_确定.png"
+            "Start_game/叉叉.png",
+            "Start_game/公告的叉叉.png",
+            "Start_game/僵尸清除_确定.png"
         ],
         "pre_delay": 500,
         "action": "Click",
         "next": [
             "关闭公告",
             "再次检查是否在主界面",
-            "确认当前是否在主界面"
         ]
     },
     "再次检查是否在主界面": {
         "timeout": 3000,
         "recognition": "TemplateMatch",
         "template": [
-            "叉叉.png",
-            "公告的叉叉.png",
-            "僵尸清除_确定.png"
+            "Start_game/主界面特征.png"
         ],
-        "action": "Click",
+        "green_mask": true,
         "post_wait_freezes": 1000,
         "next": [
             "关闭公告",

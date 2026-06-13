@@ -4,10 +4,10 @@
     "description": "这是超级冷门的游戏居然有人做脚本的pvzmaa。",
     "contact": "QQ群: 669689256",
     "license": "MIT",
-    "welcome": "首次使用！欢迎使用 MAA!",
     "github": "https://github.com/Maa-Assistant-PVZ-The-best/MAAPVZ",
-    "version": "dbugv0.0.7",
     "icon": ".\\resource\\logo.ico",
+    "mirrorchyan_rid": "MaaPVZ",
+    "mirrorchyan_multiplatform": true,
     "agent": {
         "child_exec": "../.venv/Scripts/python.exe",
         "child_args": [
@@ -30,39 +30,49 @@
             "name": "PVZ_2_国服通用",
             "path": [
                 "./resource"
+            ],
+            "option": [
+                "渠道服"
             ]
         }
     ],
     "import": [
         "./resource/task/plants_explore_debris.json",
-        "./resource/task/fragment_challenge.json"
+        "./resource/task/fragment_challenge.json",
+        "./resource/pipeline/HeartTower_0.json",
+        "./resource/pipeline/HeartTower_1.json",
+        "./resource/pipeline/HeartTower_2.json",
+        "./resource/pipeline/HeartTower_3.json"
     ],
     "task": [
         {
             "name": "开始登录",
             "entry": "选择渠道服",
             "option": [
-                "重复启动时黑屏请打开",
-                "渠道服"
+                "重复启动时黑屏请打开"
             ],
             "resource": [
                 "PVZ_2_国服通用"
             ],
+            "default_check": true,
             "description": "打开模拟器后开始"
         },
         {
             "name": "签到",
             "entry": "签到_前置检查",
+            "default_check": true,
             "description": "进行每日签到任务"
         },
         {
             "name": "执行每日50钻(免广告卡)",
             "entry": "每日50钻_拥有免广告卡_前置检查",
-            "description": "进行领取50钻石任务，前提是拥有免广告卡"
+            "default_check": true,
+            "description": "需要拥有免广告卡"
         },
         {
             "name": "植物探险",
             "entry": "植物探险_前置检查",
+            "default_check": true,
             "option": [
                 "海盗/埃及",
                 "西部/功夫",
@@ -74,10 +84,62 @@
                 "平安/复兴",
                 "海底世界"
             ],
-            "description": "选择植物，世界越靠前，植物越靠前，所选的植物执行探索的优先级越高，进行植物探险任务，会先检查一遍有无探险完成的植物，如果有就先完成它，全部领取结束后才会开始新的探险任务，如果你全部勾上的话，就会只执行前四个"
+            "description": "先领取奖励，再进行探险"
         },
         {
-            "name": "双人对决（测试）",
+            "name": "碎片挑战（测试）",
+            "entry": "碎片挑战_前置检查",
+            "description": "建议给仙人掌加点攻击，传奇巨人有概率会输",
+            "option": [
+                "选择植物碎片",
+                "巨人危机配置",
+                "邪恶入侵配置"
+                // "暴走雪人配置"
+            ]
+        },
+        {
+            "name": "刷胜场/金币（测试）",
+            "entry": "埃及第一关刷金币_前置检查",
+            "description": "不要给仙人掌带超级装扮",
+            "option": [
+                "刷金币模式选择"
+            ]
+        },
+        {
+            "name": "幸运宝藏",
+            "description": "仅自动领取，不会向你汇报获得什么东西",
+            "entry": "幸运宝藏_前置检查"
+        },
+        {
+            "name": "时空秘境",
+            "option": [
+                "模式选择"
+            ],
+            "entry": "时空秘境_前置检查",
+            "default_check": false,
+        },
+        {
+            "name": "无尽挑战",
+            "entry": "无尽挑战_前置检查",
+            "option": [
+                "当期无尽模式"
+            ]
+        },
+        {
+            "name": "心塔自动脚本",
+            "entry": "HeartTowerEntry",
+            "option": [
+                "起始关卡选择"
+            ]
+        },
+        {
+            "name": "戴夫杯",
+            "entry": "Dai_Enter",
+            "default_check": false,
+            "description": "在匹配界面开脚本"
+        },
+        {
+            "name": "双人对决（已禁用）",
             "entry": "双人对决_前置检查",
             "resource": [
                 "PVZ_2_国服通用"
@@ -90,25 +152,14 @@
                 "放置3阶5阶植物",
                 "额外弹窗直接关闭"
             ],
-            "description": "在血量降低后放植物以及僵尸"
+            "description": "擅自开启造成的后果概不负责"
         },
         {
-            "name": "碎片挑战",
-            "entry": "碎片挑战_前置检查",
-            // "option": [
-            //     "期望植物碎片",
-            //     "巨人危机配置",
-            //     "邪恶入侵配置",
-            //     "暴走雪人配置"
-            // ]
-        },
-        {
-            "name": "创意庭院",
-            "entry": "创意庭院_前置检查"
-        },
-        {
-            "name": "dbug",
-            "entry": "碎片挑战_选择多余植物进行占位"
+            "name": "小工具",
+            "entry": "mini_tools",
+            "option": [
+                "选择工具"
+            ]
         },
         {
             "name": "日志清理",
@@ -120,41 +171,1101 @@
             "description": "清理多余的日志,节省空间"
         },
         {
-            "name": "埃及第一关刷金币",
-            "entry": "埃及第一关刷金币_前置检查"
-        }
+            "name": "创意庭院（不要开启）",
+            "entry": "创意庭院_前置检查"
+        },
+        {
+            "name": "dbug（不要开启）",
+            "entry": "探索_探险次数耗尽"
+        },
     ],
     "option": {
-        // "期望植物碎片": {
-        //     "type": "select",
-        //     "cases": [
-        //         {
-        //             "name": "二阶猕猴桃",
-        //             "pipeline_override": {}
-        //         }
-        //     ]
-        // },
-        // "巨人危机配置": {
-        //     "type": "select",
-        //     "description": "你要保证你的box含有这个植物！",
-        //     "cases": [
-        //         {
-        //             "name": "二阶仙人掌",
-        //             "pipeline_override": {}
-        //         }
-        //     ]
-        // },
-        // "邪恶入侵配置": {
-        //     "type": "select",
-        //     "description": "你要保证你的box含有这个植物！",
-        //     "default_case": "二阶猕猴桃",
-        //     "cases": [
-        //         {
-        //             "name": "二阶猕猴桃",
-        //             "pipeline_override": {}
-        //         }
-        //     ]
-        // },
+        "当期无尽模式": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "巨浪沙滩"
+                }
+            ]
+        },
+        "模式选择": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "地宫遗迹",
+                    "option": [
+                        "地宫模式"
+                    ]
+                }
+            ]
+        },
+        "地宫模式": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "地宫遗迹2无尽",
+                    "description": "需要有歌葵，会一直重开，能一直刷但是刷的很慢",
+                    "pipeline_override": {
+                        "时空秘境_时空秘境": {
+                            "next": [
+                                "地宫2无尽_地宫秘境2"
+                            ]
+                        },
+                    }
+                }
+            ]
+        },
+        "起始关卡选择": {
+            "type": "select",
+            "label": "起始关卡",
+            "description": "选择要打的关卡",
+            "default_case": "1关",
+            "cases": [
+                {
+                    "name": "1关",
+                    "label": "第1关",
+                    "pipeline_override": {
+                        "HeartTowerEntry": {
+                            "next": [
+                                "1关"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "2关",
+                    "label": "第2关",
+                    "pipeline_override": {
+                        "HeartTowerEntry": {
+                            "next": [
+                                "2关"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "3-149关",
+                    "label": "第3~149关",
+                    "pipeline_override": {
+                        "HeartTowerEntry": {
+                            "next": [
+                                "3_149关"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "刷金币模式选择": {
+            "type": "select",
+            "default_case": "一直刷胜场/金币",
+            "cases": [
+                {
+                    "name": "只刷十把",
+                    "pipeline_override": {
+                        "埃及1_重置所有偏移": {
+                            "next": [
+                                "埃及1_重开十次"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "一直刷胜场/金币"
+                }
+            ]
+        },
+        "选择工具": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "进化神器测序列(测试)",
+                    "description": "截图保存在screenshots文件夹下",
+                    "option": [
+                        "选择关卡",
+                        "点击一阶",
+                        "点击三阶",
+                        "点击四阶"
+                    ],
+                    "pipeline_override": {
+                        "mini_tools": {
+                            "next": [
+                                "选择渠道服"
+                            ]
+                        },
+                        "关闭公告": {
+                            "next": [
+                                "关闭公告",
+                                "检查序列_前置检查"
+                            ]
+                        },
+                        "关闭pvz_4399": {
+                            "enabled": true
+                        },
+                        "关闭pvz_XM": {
+                            "enabled": true
+                        },
+                        "关闭pvz_b服": {
+                            "enabled": true
+                        },
+                        "关闭pvz_荣耀": {
+                            "enabled": true
+                        },
+                        "关闭pvz_vivo": {
+                            "enabled": true
+                        },
+                        "关闭pvz_九游": {
+                            "enabled": true
+                        },
+                        "关闭pvz_OPPO": {
+                            "enabled": true
+                        },
+                        "关闭pvz_好游快报": {
+                            "enabled": true
+                        },
+                        "关闭pvz_百度": {
+                            "enabled": true
+                        },
+                        "关闭pvz_360": {
+                            "enabled": true
+                        },
+                        "关闭pvz_华为": {
+                            "enabled": true
+                        },
+                        "关闭pvz_7723": {
+                            "enabled": true
+                        },
+                        "关闭pvz_官服": {
+                            "enabled": true
+                        },
+                        "关闭pvz_应用宝_qq": {
+                            "enabled": true
+                        },
+                        "关闭pvz_应用宝_微信": {
+                            "enabled": true
+                        }
+                    }
+                },
+            ]
+        },
+        "选择关卡": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "无尽埃及",
+                    "option": [
+                        "种植类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_点击竞技": {
+                            "next": [
+                                "序列检查_点击无尽",
+                                "序列检查_点击竞技"
+                            ]
+                        },
+                        "序列检查_无尽_寻找埃及": {
+                            "enabled": true,
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "post_delay": 15000,
+                            "next": [
+                                "截图保存_无尽埃及"
+                            ]
+                        }
+                    },
+                },
+                {
+                    "name": "无尽海盗",
+                    "option": [
+                        "种植类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_点击竞技": {
+                            "next": [
+                                "序列检查_点击无尽",
+                                "序列检查_点击竞技"
+                            ]
+                        },
+                        "序列检查_无尽_寻找海盗": {
+                            "enabled": true,
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "post_delay": 15000,
+                            "next": [
+                                "截图保存_无尽海盗"
+                            ]
+                        }
+                    },
+                },
+                {
+                    "name": "无尽沙滩",
+                    "option": [
+                        "种植类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_点击竞技": {
+                            "next": [
+                                "序列检查_点击无尽",
+                                "序列检查_点击竞技"
+                            ]
+                        },
+                        "序列检查_无尽_寻找沙滩": {
+                            "enabled": true,
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "post_delay": 15000,
+                            "next": [
+                                "截图保存_无尽沙滩"
+                            ]
+                        }
+                    },
+                },
+                {
+                    "name": "追击第一关",
+                    "option": [
+                        "关卡类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_开始战斗": {
+                            "next": [
+                                "序列检查_开始战斗_种植1"
+                            ]
+                            //在interface覆盖
+                        },
+                        "序列检查_点击追击": {
+                            "next": [
+                                "序列检查_点击追击_追1"
+                            ]
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "next": [
+                                "截图保存_追1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "追击第二关",
+                    "option": [
+                        "关卡类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_开始战斗": {
+                            "next": [
+                                "序列检查_开始战斗_种植1"
+                            ]
+                            //在interface覆盖
+                        },
+                        "序列检查_点击追击": {
+                            "next": [
+                                "序列检查_点击追击_追2"
+                            ]
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "next": [
+                                "截图保存_追2"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "追击第三关",
+                    "option": [
+                        "关卡类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_开始战斗": {
+                            "next": [
+                                "序列检查_开始战斗_种植1"
+                            ]
+                            //在interface覆盖
+                        },
+                        "序列检查_点击追击": {
+                            "next": [
+                                "序列检查_点击追击_追3"
+                            ]
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "next": [
+                                "截图保存_追3"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "追击第四关",
+                    "option": [
+                        "关卡类型"
+                    ],
+                    "pipeline_override": {
+                        "序列检查_开始战斗": {
+                            "next": [
+                                "序列检查_开始战斗_种植1"
+                            ]
+                            //在interface覆盖
+                        },
+                        "序列检查_点击追击": {
+                            "next": [
+                                "序列检查_点击追击_滑动"
+                            ]
+                        },
+                        "序列检查_局内_使用进化神器": {
+                            "next": [
+                                "截图保存_追4"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "种植类型": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "种八种不同植物",
+                    "description": "需要在编队6中配置，详细参考公告",
+                    "pipeline_override": {
+                        "序列检查_开始战斗": {
+                            "next": [
+                                "序列检查_使用8种植物_种植_1"
+                            ]
+                            //在interface覆盖
+                        },
+                        "序列检查_无尽_点击配队_滑动": {
+                            "next": [
+                                "序列检查_无尽_配队_使用8种植物"
+                            ]
+                        },
+                        "序列检查_查找植物_清空卡牌": {
+                            "next": [
+                                "序列检查_查找植物_清空卡牌",
+                                "序列检查_查找植物_寻找_滑动"
+                            ]
+                        },
+                    }
+                }
+            ]
+        },
+        "关卡类型": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "积分赛"
+                },
+                {
+                    "name": "传送带",
+                    "pipeline_override": {
+                        "序列检查_进入局内_潘追_开始": {
+                            "next": [
+                                "序列检查_进入局内_潘追_传送带",
+                                "序列检查_进入局内_潘追_未选择增益"
+                            ]
+                        },
+                        "序列检查_进入局内_潘追_未选择增益": {
+                            "next": [
+                                "序列检查_进入局内_潘追_传送带"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "点击一阶": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "option": [
+                        "点击一阶多少次后重置"
+                    ],
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "点击一阶": {
+                            "enabled": false,
+                        }
+                    }
+                }
+            ]
+        },
+        "点击三阶": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "option": [
+                        "点击三阶多少次后重置"
+                    ],
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "点击三阶": {
+                            "enabled": false,
+                        }
+                    }
+                }
+            ]
+        },
+        "点击四阶": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "option": [
+                        "点击四阶多少次后重置"
+                    ],
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "点击四阶": {
+                            "enabled": false,
+                        }
+                    }
+                }
+            ]
+        },
+        "点击一阶多少次后重置": {
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "点击一阶多少次后重置",
+                    "pipeline_type": "int",
+                    "default": "999",
+                    "verify": "^[1-9]\\d{0,2}$"
+                },
+                {
+                    "name": "一阶初始点击次数",
+                    "pipeline_type": "int",
+                    "default": "1",
+                    "verify": "^[1-9]\\d{0,2}$"
+                }
+            ],
+            "pipeline_override": {
+                "点击一阶": {
+                    "custom_action_param": {
+                        "template": "神器一阶.png",
+                        "level": 1,
+                        "roi": [
+                            630,
+                            345,
+                            65,
+                            72
+                        ],
+                        "delay": 500,
+                        "reset_after": "{点击一阶多少次后重置}",
+                        "initial_count": "{一阶初始点击次数}"
+                    },
+                }
+            }
+        },
+        "点击三阶多少次后重置": {
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "点击三阶多少次后重置",
+                    "pipeline_type": "int",
+                    "default": "999",
+                    "verify": "^[1-9]\\d{0,2}$"
+                },
+                {
+                    "name": "三阶初始点击次数",
+                    "pipeline_type": "int",
+                    "default": "1",
+                    "verify": "^[1-9]\\d{0,2}$"
+                }
+            ],
+            "pipeline_override": {
+                "点击三阶": {
+                    "custom_action_param": {
+                        "template": "神器三阶.png",
+                        "level": 3,
+                        "roi": [
+                            755,
+                            352,
+                            60,
+                            63
+                        ],
+                        "delay": 500,
+                        "reset_after": "{点击三阶多少次后重置}",
+                        "initial_count": "{三阶初始点击次数}"
+                    },
+                }
+            }
+        },
+        "点击四阶多少次后重置": {
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "点击四阶多少次后重置",
+                    "pipeline_type": "int",
+                    "default": "999",
+                    "verify": "^[1-9]\\d{0,2}$"
+                },
+                {
+                    "name": "四阶初始点击次数",
+                    "pipeline_type": "int",
+                    "default": "1",
+                    "verify": "^[1-9]\\d{0,2}$"
+                }
+            ],
+            "pipeline_override": {
+                "点击四阶": {
+                    "custom_action_param": {
+                        "template": "神器四阶.png",
+                        "level": 4,
+                        "roi": [
+                            818,
+                            350,
+                            61,
+                            63
+                        ],
+                        "delay": 500,
+                        "initial_count": "{四阶初始点击次数}",
+                        "reset_after": "{点击四阶多少次后重置}"
+                    },
+                }
+            }
+        },
+        "选择植物碎片": {
+            "type": "checkbox",
+            "description": "优先选择紫卡，其次品质往下",
+            "cases": [
+                //紫卡
+                {
+                    "name": "烈焰菇",
+                    "pipeline_override": {
+                        "碎片挑战_检索烈焰菇": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "蚕豆突击队",
+                    "pipeline_override": {
+                        "碎片挑战_检索蚕豆突击队": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "椰子加农炮",
+                    "pipeline_override": {
+                        "碎片挑战_检索椰子加农炮": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "蒲公英",
+                    "pipeline_override": {
+                        "碎片挑战_检索蒲公英": {
+                            "enabled": true
+                        }
+                    }
+                },
+                // {
+                //     "name": "胆小菇",
+                //     "pipeline_override": {
+                //         "碎片挑战_检索胆小菇": {
+                //             "enabled": true
+                //         }
+                //     }
+                // },
+                {
+                    "name": "吹风荚兰",
+                    "pipeline_override": {
+                        "碎片挑战_检索吹风荚兰": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "猕猴桃",
+                    "pipeline_override": {
+                        "碎片挑战_检索猕猴桃": {
+                            "enabled": true
+                        }
+                    }
+                },
+                //紫卡
+                //蓝卡
+                {
+                    "name": "双胞胎向日葵",
+                    "pipeline_override": {
+                        "碎片挑战_检索双胞向日葵": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "潜伏芹菜",
+                    "pipeline_override": {
+                        "碎片挑战_检索潜伏芹菜": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "辣椒投手",
+                    "pipeline_override": {
+                        "碎片挑战_检索辣椒投手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "魔音甜菜",
+                    "pipeline_override": {
+                        "碎片挑战_检索魔音甜菜": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "橡木射手",
+                    "pipeline_override": {
+                        "碎片挑战_检索橡木射手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "龙舌兰",
+                    "pipeline_override": {
+                        "碎片挑战_检索龙舌兰": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "原始向日葵",
+                    "pipeline_override": {
+                        "碎片挑战_检索原始向日葵": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "鳄梨",
+                    "pipeline_override": {
+                        "碎片挑战_检索鳄梨": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "激光豆",
+                    "pipeline_override": {
+                        "碎片挑战_检索激光豆": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "南瓜巫师",
+                    "pipeline_override": {
+                        "碎片挑战_检索南瓜巫师": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "莲小蓬",
+                    "pipeline_override": {
+                        "碎片挑战_检索莲小蓬": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "星星果",
+                    "pipeline_override": {
+                        "碎片挑战_检索星星果": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "窝瓜",
+                    "pipeline_override": {
+                        "碎片挑战_检索窝瓜": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "双重射手",
+                    "pipeline_override": {
+                        "碎片挑战_检索双重射手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "棉小雪",
+                    "pipeline_override": {
+                        "碎片挑战_检索棉小雪": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "孢子菇",
+                    "pipeline_override": {
+                        "碎片挑战_检索孢子菇": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "火龙果",
+                    "pipeline_override": {
+                        "碎片挑战_检索火龙果": {
+                            "enabled": true
+                        }
+                    }
+                },
+                //蓝卡
+                //绿卡
+                {
+                    "name": "三重射手",
+                    "pipeline_override": {
+                        "碎片挑战_检索三重射手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "复活萝卜",
+                    "pipeline_override": {
+                        "碎片挑战_检索复活萝卜": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "回旋镖射手",
+                    "pipeline_override": {
+                        "碎片挑战_检索回旋镖射手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "钢地刺",
+                    "pipeline_override": {
+                        "碎片挑战_检索钢地刺": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "旋转菠萝",
+                    "pipeline_override": {
+                        "碎片挑战_检索旋转菠萝": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "大王花",
+                    "pipeline_override": {
+                        "碎片挑战_检索大王花": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "火炬树桩",
+                    "pipeline_override": {
+                        "碎片挑战_检索火炬树桩": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "西瓜投手",
+                    "pipeline_override": {
+                        "碎片挑战_检索西瓜投手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "香水蘑菇",
+                    "pipeline_override": {
+                        "碎片挑战_检索香水蘑菇": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "棱镜草",
+                    "pipeline_override": {
+                        "碎片挑战_检索棱镜草": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "高坚果",
+                    "pipeline_override": {
+                        "碎片挑战_检索高坚果": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "旋涡枇杷",
+                    "pipeline_override": {
+                        "碎片挑战_检索旋涡枇杷": {
+                            "enabled": true
+                        }
+                    }
+                },
+                // {
+                //     "name": "飞碟瓜",
+                //     "pipeline_override": {
+                //         "碎片挑战_检索飞碟瓜": {
+                //             "enabled": true
+                //         }
+                //     }
+                // },
+                {
+                    "name": "旋风橡果",
+                    "pipeline_override": {
+                        "碎片挑战_检索旋风橡果": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "眩晕洋葱",
+                    "pipeline_override": {
+                        "碎片挑战_检索眩晕洋葱": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "闪电芦苇",
+                    "pipeline_override": {
+                        "碎片挑战_检索闪电芦苇": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "树脂投手",
+                    "pipeline_override": {
+                        "碎片挑战_检索树脂投手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "机枪石榴",
+                    "pipeline_override": {
+                        "碎片挑战_检索机枪石榴": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "寒冰射手",
+                    "pipeline_override": {
+                        "碎片挑战_检索寒冰射手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "竹小弟",
+                    "pipeline_override": {
+                        "碎片挑战_检索竹小弟": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "爆炸坚果",
+                    "pipeline_override": {
+                        "碎片挑战_检索爆炸坚果": {
+                            "enabled": true
+                        }
+                    }
+                },
+                //绿卡
+                //白卡
+                {
+                    "name": "小喷菇",
+                    "pipeline_override": {
+                        "碎片挑战_检索小喷菇": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "卷心菜投手",
+                    "pipeline_override": {
+                        "碎片挑战_检索卷心菜投手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "土豆雷",
+                    "pipeline_override": {
+                        "碎片挑战_检索土豆雷": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "冰冻生菜",
+                    "pipeline_override": {
+                        "碎片挑战_检索冰冻生菜": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "氧气海藻",
+                    "pipeline_override": {
+                        "碎片挑战_检索氧气海藻": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "豌豆射手",
+                    "pipeline_override": {
+                        "碎片挑战_检索豌豆射手": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "滴水冰莲",
+                    "pipeline_override": {
+                        "碎片挑战_检索滴水冰莲": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "白萝卜",
+                    "pipeline_override": {
+                        "碎片挑战_检索白萝卜": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "竹笋",
+                    "pipeline_override": {
+                        "碎片挑战_检索竹笋": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "坚果",
+                    "pipeline_override": {
+                        "碎片挑战_检索坚果": {
+                            "enabled": true
+                        }
+                    }
+                },
+                // {
+                //     "name": "地刺",
+                //     "pipeline_override": {
+                //         "碎片挑战_检索地刺": {
+                //             "enabled": true
+                //         }
+                //     }
+                // },
+                {
+                    "name": "大丽菊",
+                    "pipeline_override": {
+                        "碎片挑战_检索大丽菊": {
+                            "enabled": true
+                        }
+                    }
+                }
+                //白卡
+            ]
+        },
+        "巨人危机配置": {
+            "type": "select",
+            "description": "你要保证你有这个植物！",
+            "cases": [
+                {
+                    "name": "二阶仙人掌",
+                    "pipeline_override": {
+                        "巨人_西部": {
+                            "next": [
+                                "巨人危机_配置仙人掌"
+                            ],
+                            "anchor": {
+                                "自动识别所需的对局配置": "巨人西部_种植仙人掌_选择仙人掌",
+                            },
+                        },
+                        "巨人_海盗": {
+                            "next": [
+                                "巨人危机_配置仙人掌"
+                            ],
+                            "anchor": {
+                                "自动识别所需的对局配置": "巨人海盗_种植仙人掌_选择仙人掌",
+                            },
+                        },
+                        "巨人_埃及": {
+                            "next": [
+                                "巨人危机_配置仙人掌"
+                            ],
+                            "anchor": {
+                                "自动识别所需的对局配置": "巨人埃及_种植仙人掌_选择仙人掌",
+                            },
+                        },
+                        "碎片挑战_选择多余植物进行占位": {
+                            "next": [
+                                "碎片挑战_选择多余植物进行占位",
+                                "碎片挑战_仙人掌_开始战斗"
+                            ]
+                        },
+                    }
+                }
+            ]
+        },
+        "邪恶入侵配置": {
+            "type": "select",
+            "description": "你要保证你有这个植物！",
+            "default_case": "二阶猕猴桃",
+            "cases": [
+                {
+                    "name": "二阶猕猴桃",
+                    "pipeline_override": {
+                        "邪恶入侵": {
+                            "next": [
+                                "邪恶入侵_配置猕猴桃"
+                            ],
+                            "anchor": {
+                                "自动识别所需的对局配置": "邪恶入侵_种植猕猴桃_选择猕猴桃",
+                            },
+                        },
+                        "碎片挑战_选择多余植物进行占位": {
+                            "next": [
+                                "碎片挑战_选择多余植物进行占位",
+                                "碎片挑战_猕猴桃_开始战斗"
+                            ]
+                        },
+                    }
+                }
+            ]
+        },
         // "暴走雪人配置": {
         //     "type": "select",
         //     "cases": []
@@ -188,6 +1299,9 @@
                 {
                     "name": "Yes",
                     "pipeline_override": {
+                        "关闭pvz_联想": {
+                            "enabled": true
+                        },
                         "关闭pvz_4399": {
                             "enabled": true
                         },
@@ -242,20 +1356,18 @@
         },
         "额外弹窗直接关闭": {
             "type": "switch",
+            "default_case": "No",
             "cases": [
                 {
                     "name": "Yes",
                     "pipeline_override": {
                         "突发情况处理": {
                             "next": [
-                                "识别第5回合",
-                                "识别第6及以上回合",
-                                "识别第7回合",
-                                "游戏胜利",
-                                "游戏失败",
                                 "重开",
                                 "识别成功，启动！",
-                                "放一号位僵尸",
+                                "判断游戏是否胜利",
+                                "判断游戏是否失败",
+                                "补种_放置一号位僵尸_升级",
                                 "突发情况处理"
                             ]
                         }
@@ -508,20 +1620,6 @@
                     }
                 },
                 {
-                    "name": "激光豆",
-                    "pipeline_override": {
-                        "寻找植物_激光豆": {
-                            "enabled": true
-                        },
-                        "放置远程一号位植物1": {
-                            "enabled": true
-                        },
-                        "补种远程一号位植物1": {
-                            "enabled": true
-                        }
-                    }
-                },
-                {
                     "name": "苹果迫机炮",
                     "description": "不太建议，这个植物打不过加速的鸡（笑）",
                     "pipeline_override": {
@@ -593,20 +1691,6 @@
                     }
                 },
                 {
-                    "name": "大喷菇",
-                    "pipeline_override": {
-                        "寻找植物_大喷菇": {
-                            "enabled": true
-                        },
-                        "放置近战一号位植物1": {
-                            "enabled": true
-                        },
-                        "补种近战一号位植物1": {
-                            "enabled": true
-                        }
-                    }
-                },
-                {
                     "name": "虎头菇",
                     "pipeline_override": {
                         "寻找植物_虎头菇": {
@@ -654,6 +1738,17 @@
             "type": "select",
             "description": "选择你要进入的渠道服",
             "cases": [
+                {
+                    "name": "联想",
+                    "pipeline_override": {
+                        "选择渠道服": {
+                            "next": [
+                                "关闭pvz_联想",
+                                "打开pvz_联想"
+                            ]
+                        }
+                    }
+                },
                 {
                     "name": "4399",
                     "pipeline_override": {
