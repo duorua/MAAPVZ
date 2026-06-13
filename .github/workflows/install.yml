@@ -260,11 +260,35 @@ jobs:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
 
+      - name: Debug changelog output
+        run: |
+          echo "=== CHANGES.md 内容 ==="
+          cat CHANGES.md
+          echo "=== git-cliff 输出变量 content ==="
+          echo "${{ steps.git-cliff.outputs.content }}"
+
+      - name: Debug git-cliff context (latest tag info)
+        run: |
+          # 查看所有标签的排序（语义化版本）
+          git tag -l --sort=-v:refname
+          # 查看 --latest 到底选中了哪个标签
+          git cliff --latest --context | jq '.version' || echo "获取上下文失败"
+
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
     needs: [meta, install, changelog]
     runs-on: ubuntu-latest
     steps:
+      - name: Debug meta outputs
+        run: |
+          echo "is_release: ${{ needs.meta.outputs.is_release }}"
+          echo "is_prerelease: ${{ needs.meta.outputs.is_prerelease }}"
+          echo "tag: ${{ needs.meta.outputs.tag }}"
+      
+      - uses: actions/download-artifact@v4
+        with:
+          path: assets
+          
       - uses: actions/download-artifact@v4
         with:
           path: assets
@@ -283,10 +307,10 @@ jobs:
           draft: false
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
 
-      - name: Trigger MirrorChyanUploading
-        shell: bash
-        run: |
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release.yml -f tag=${{ needs.meta.outputs.tag }}
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Trigger MirrorChyanUploading
+      #   shell: bash
+      #   run: |
+      #     gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release.yml -f tag=${{ needs.meta.outputs.tag }}
+      #     gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
