@@ -264,12 +264,12 @@ jobs:
           echo "=== git-cliff 输出变量 content ==="
           echo "${{ steps.git-cliff.outputs.content }}"
 
-      - name: Debug git-cliff context (latest tag info)
+      - name: Debug latest tag info
         run: |
           # 查看所有标签的排序
           git tag -l --sort=-v:refname
-          # 查看 --latest 到底选中了哪个标签
-          git-cliff --latest --context | jq '.version' || echo "获取上下文失败"
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "无标签")
+          echo "Latest tag (git describe): $latest_tag"
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
