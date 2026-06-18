@@ -134,6 +134,15 @@
             "点击登录"
         ]
     },
+    "打开pvz_taptap": {
+        "timeout": 180000,
+        "action": "StartApp",
+        "package": "com.popcap.pvz2cthdbk",
+        "post_delay": 16000,
+        "next": [
+            "点击登录_taptap"
+        ]
+    },
     "打开pvz_4399": {
         "timeout": 180000,
         "action": "StartApp",
@@ -410,6 +419,35 @@
             "target": true,
             "method": 5
         },
+        "action": "Click",
+        "post_delay": 4000,
+        "next": [
+            "开始游戏",
+            "关闭广告通用",
+            "小米的广告",
+            "小米_下次再说"
+        ]
+    },
+    "点击登录_taptap": {
+        "timeout": 30000,
+        "recognition": "TemplateMatch",
+        "template": [
+            "Start_game/taptap登录.png",
+            "Start_game/taptap登录_免绑包.png"
+        ],
+        "pre_wait_freezes": {
+            "time": 2000,
+            "threshold": 0.95,
+            "timeout": 10000,
+            "target": true,
+            "method": 5
+        },
+        "roi": [
+            644,
+            251,
+            517,
+            437
+        ],
         "action": "Click",
         "post_delay": 4000,
         "next": [
