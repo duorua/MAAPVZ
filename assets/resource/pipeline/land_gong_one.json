@@ -1,13 +1,833 @@
 {
+    "地宫1无尽_地宫秘境1": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "Detection_Order/地宫1.png"
+        ],
+        "roi": [
+            212,
+            421,
+            169,
+            91
+        ],
+        "action": "Click",
+        "next": [
+            "地宫1无尽_立即前往",
+            "地宫1无尽_地宫秘境1"
+        ]
+    },
+    "地宫1无尽_立即前往": {
+        "recognition": "OCR",
+        "expected": [
+            "立即前往"
+        ],
+        "action": "Click",
+        "next": [
+            "地宫1无尽_困难模式叉叉",
+            "地宫1无尽_无尽模式",
+            "地宫1无尽_立即前往"
+        ]
+    },
+    "地宫1无尽_困难模式叉叉": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/叉叉.png"
+        ],
+        "action": "Click",
+        "next": [
+            "地宫1无尽_困难模式叉叉",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_无尽模式": {
+        "recognition": "OCR",
+        "expected": [
+            "无尽模式",
+            "无",
+            "尽模式"
+        ],
+        "anchor": {
+            "双发种植": "地宫1无尽_第一关_种植双发1" //因为是在循环里的，不可以加maxhit，所以改用anchor，重构可以考虑用custom
+        },
+        "roi": [
+            918,
+            613,
+            112,
+            69
+        ],
+        "action": "Click",
+        "next": [
+            "地宫1无尽_无尽模式_继续",
+            "地宫1无尽_无尽模式"
+        ]
+    },
+    "地宫1无尽_无尽模式_继续": {
+        "recognition": "OCR",
+        "expected": [
+            "确定"
+        ],
+        "roi": [
+            596,
+            498,
+            81,
+            35
+        ],
+        "action": "Click",
+        "next": [
+            "地宫1无尽_第一关_识别开始战斗"
+        ]
+    },
+    "地宫1无尽_第一关_识别开始战斗": {
+        "recognition": "OCR",
+        "expected": [
+            "开始战斗"
+        ],
+        "roi": [
+            1048,
+            630,
+            234,
+            84
+        ],
+        "post_delay": 500,
+        "next": [
+            "地宫1无尽_第一关_清空卡牌",
+        ]
+    },
+    "地宫1无尽_第一关_清空卡牌": {
+        "recognition": "OCR",
+        "expected": [
+            "清空卡牌"
+        ],
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_第一关_寻找双发",
+            //初始化ancho
+        },
+        "roi": [
+            22,
+            660,
+            75,
+            27
+        ],
+        "action": "Click",
+        "next": [
+            "[Anchor]下一个寻找的植物",
+            "寻找植物_滑动"
+        ]
+    },
+    "地宫1无尽_第一关_寻找双发": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_第一关_寻找蓓蕾",
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/双发.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_第一关_寻找蓓蕾": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_第一关_寻找茄子",
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/阳光蓓蕾.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_第一关_寻找茄子": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_第一关_寻找草皮",
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/变身茄子.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_第一关_寻找草皮": {
+        "anchor": {
+            "下一个寻找的植物": ""
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/草皮.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "地宫1无尽_第一关_开始"
+        ]
+    },
+    "地宫1无尽_第一关_开始": {
+        "recognition": "OCR",
+        "expected": [
+            "开始战斗"
+        ],
+        "roi": [
+            1048,
+            630,
+            234,
+            84
+        ],
+        "threshold": 0.75,
+        "next": [
+            "地宫1无尽_第一关_点击开始战斗"
+        ]
+    },
+    "地宫1无尽_第一关_点击开始战斗": {
+        "recognition": "OCR",
+        "expected": [
+            "开始战斗"
+        ],
+        "roi": [
+            1048,
+            630,
+            234,
+            84
+        ],
+        "threshold": 0.75,
+        "action": "Click",
+        "next": [
+            "地宫1无尽_进入关卡_第一关"
+        ]
+    },
+    "地宫1无尽_进入关卡_第一关": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植蓓蕾"
+        ]
+    },
+    "地宫1无尽_第一关_种植蓓蕾": {
+        "action": "Swipe",
+        "begin": [
+            55,
+            190,
+            6,
+            4
+        ],
+        "end": [
+            639,
+            370,
+            13,
+            3
+        ],
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "地宫1无尽_第一关_种植茄子蓓蕾"
+        ]
+    },
+    "地宫1无尽_第一关_种植茄子蓓蕾": {
+        "action": "Swipe",
+        "begin": [
+            52,
+            260,
+            14,
+            6
+        ],
+        "end": [
+            550,
+            369,
+            7,
+            5
+        ],
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "地宫1无尽_第一关_滑动领取蓓蕾阳光"
+        ]
+    },
+    "地宫1无尽_第一关_滑动领取蓓蕾阳光": {
+        "pre_delay": 1500,
+        "action": "Swipe",
+        "begin": [
+            386,
+            400,
+            9,
+            1
+        ],
+        "end": [
+            841,
+            402,
+            5,
+            1
+        ],
+        "repeat_delay": 150,
+        "repeat": 7,
+        "next": [
+            "地宫1无尽_第一关_种植双发1"
+        ]
+    },
+    "地宫1无尽_第一关_种植双发1": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植双发.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            1,
+            71,
+            127,
+            90
+        ],
+        "begin": true,
+        "end": [
+            453,
+            146,
+            19,
+            21
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植草皮1",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_第一关_种植草皮1": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植草皮.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            4,
+            286,
+            129,
+            93
+        ],
+        "begin": true,
+        "end": [
+            466,
+            269,
+            3,
+            4
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植双发2",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_第一关_种植双发2": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植双发.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            1,
+            71,
+            127,
+            90
+        ],
+        "begin": true,
+        "end": [
+            457,
+            264,
+            19,
+            22
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植草皮2",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_第一关_种植草皮2": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植草皮.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            4,
+            286,
+            129,
+            93
+        ],
+        "begin": true,
+        "end": [
+            457,
+            480,
+            4,
+            4
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植双发3",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_第一关_种植双发3": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植双发.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            1,
+            71,
+            127,
+            90
+        ],
+        "begin": true,
+        "end": [
+            456,
+            360,
+            12,
+            13
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植双发4",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_第一关_种植双发4": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植双发.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            1,
+            71,
+            127,
+            90
+        ],
+        "begin": true,
+        "end": [
+            458,
+            487,
+            10,
+            12
+        ],
+        "next": [
+            "地宫1无尽_第一关_种植双发5",
+            "地宫1无尽_无尽模式",
+        ]
+    },
+    "地宫1无尽_第一关_种植双发5": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/种植双发.png"
+        ],
+        "action": "Swipe",
+        "threshold": [
+            0.9
+        ],
+        "roi": [
+            1,
+            71,
+            127,
+            90
+        ],
+        "begin": true,
+        "end": [
+            461,
+            591,
+            6,
+            16
+        ],
+        "next": [
+            "地宫1无尽_第一关_等待"
+        ]
+    },
+    "地宫1无尽_第一关_等待": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
+        "next": [
+            "地宫1无尽_无尽模式",
+            "地宫1无尽_下一关_切换配置",
+            "地宫1无尽_第一关_收集阳光",
+            "地宫1无尽_结算",
+            "地宫1无尽_第一关_等待",
+        ]
+    },
+    "地宫1无尽_第一关_收集阳光": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/阳光.png",
+            "land_gong_one/阳光1.png",
+        ],
+        "pressure": 10,
+        "roi": [
+            424,
+            100,
+            822,
+            546
+        ],
+        "threshold": [
+            0.4
+        ],
+        "pre_delay": 0,
+        "action": "Click",
+        "green_mask": true,
+        "next": [
+            "地宫1无尽_无尽模式",
+            "地宫1无尽_下一关_切换配置",
+            "地宫1无尽_第一关_收集阳光",
+            "地宫1无尽_结算",
+            "地宫1无尽_第一关_等待",
+        ]
+    },
+    "地宫1无尽_下一关_切换配置": {
+        "recognition": "OCR",
+        "expected": [
+            "清空卡牌"
+        ],
+        "roi": [
+            11,
+            654,
+            104,
+            35
+        ],
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找向日葵"
+        },
+        "threshold": 0.75,
+        "action": "Click",
+        "next": [
+            "[Anchor]下一个寻找的植物",
+            "寻找植物_滑动"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找向日葵": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找火炬"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/向日葵.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找火炬": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找蓓蕾"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/树桩.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找蓓蕾": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找南瓜罩"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/阳光蓓蕾.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找南瓜罩": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找机枪"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/南瓜罩.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找机枪": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找双发"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/机枪.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找双发": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找地皮"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/双发.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找地皮": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找茄子地皮"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/草皮.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "滑回最顶上"
+        ]
+    },
+    "地宫1无尽_切换配置_寻找茄子地皮": {
+        "anchor": {
+            "下一个寻找的植物": "地宫1无尽_切换配置_寻找茄子地皮"
+        },
+        "recognition": "TemplateMatch",
+        "roi": [
+            53,
+            285,
+            796,
+            437
+        ],
+        "template": [
+            "land_gong_one/变身茄子.png"
+        ],
+        "target_offset": [
+            17,
+            0,
+            0,
+            0
+        ],
+        "action": "Click",
+        "threshold": [
+            0.8
+        ],
+        "post_wait_freezes": 1000,
+        "next": [
+            "地宫1无尽_切换配置_开始战斗"
+        ]
+    },
+    "地宫1无尽_切换配置_开始战斗": {
+        "next": [
+            "地宫1"
+        ]
+    },
     "地宫1": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "land_gong_1_开始"
+            "地宫_1_开始"
         ],
         "post_delay": 100
     },
-    "land_gong_1_开始": {
+    "地宫_1_开始": {
         "recognition": "OCR",
         "expected": "开始战斗",
         "roi": [
@@ -22,11 +842,11 @@
         "pre_delay": 0,
         "rate_limit": 100,
         "next": [
-            "land_gong_1_检查land_gong_1_boss",
-            "land_gong_1_小怪关_点击开始"
+            "地宫_1_检查地宫_1_boss",
+            "地宫_1_小怪关_点击开始"
         ]
     },
-    "land_gong_1_检查land_gong_1_boss": {
+    "地宫_1_检查地宫_1_boss": {
         "recognition": "ColorMatch",
         "lower": [
             109,
@@ -50,10 +870,10 @@
         "pre_delay": 0,
         "rate_limit": 100,
         "next": [
-            "land_gong_1_boss关"
+            "地宫_1_boss关"
         ]
     },
-    "land_gong_1_小怪关_点击开始": {
+    "地宫_1_小怪关_点击开始": {
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
@@ -62,10 +882,10 @@
         ],
         "post_delay": 1000,
         "next": [
-            "land_gong_1_加速"
+            "地宫_1_加速"
         ]
     },
-    "land_gong_1_加速": {
+    "地宫_1_加速": {
         "recognition": "TemplateMatch",
         "template": "land_gong_one/加速.png",
         "roi": [
@@ -80,18 +900,18 @@
             37
         ],
         "next": [
-            "land_gong_1_小关"
+            "地宫_1_小关"
         ],
         "timeout": 100
     },
-    "land_gong_1_小关": {
+    "地宫_1_小关": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "land_gong_1_小怪_点波1"
+            "地宫_1_小怪_点波1"
         ]
     },
-    "land_gong_1_小怪_点波1": {
+    "地宫_1_小怪_点波1": {
         "action": "Click",
         "target": [
             1216,
@@ -100,10 +920,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛1_1"
+            "地宫_1_小怪_草垛1_1"
         ]
     },
-    "land_gong_1_小怪_草垛1_1": {
+    "地宫_1_小怪_草垛1_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -117,10 +937,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发1_2"
+            "地宫_1_小怪_双发1_2"
         ]
     },
-    "land_gong_1_小怪_双发1_2": {
+    "地宫_1_小怪_双发1_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -134,10 +954,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿1_3"
+            "地宫_1_小怪_草垛仿1_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿1_3": {
+    "地宫_1_小怪_草垛仿1_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -151,10 +971,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_火炬1_4"
+            "地宫_1_小怪_火炬1_4"
         ]
     },
-    "land_gong_1_小怪_火炬1_4": {
+    "地宫_1_小怪_火炬1_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -168,10 +988,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_5"
+            "地宫_1_小怪_南瓜1_5"
         ]
     },
-    "land_gong_1_小怪_南瓜1_5": {
+    "地宫_1_小怪_南瓜1_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -185,10 +1005,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵1_6"
+            "地宫_1_小怪_向日葵1_6"
         ]
     },
-    "land_gong_1_小怪_向日葵1_6": {
+    "地宫_1_小怪_向日葵1_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -202,10 +1022,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集1"
+            "地宫_1_阳光收集1",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_阳光收集1": {
+    "地宫_1_阳光收集1": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             823,
@@ -219,10 +1045,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集1_2"
+            "地宫_1_阳光收集1_2"
         ]
     },
-    "land_gong_1_阳光收集1_2": {
+    "地宫_1_阳光收集1_2": {
         "action": "Swipe",
         "begin": [
             924,
@@ -236,10 +1062,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集1_3"
+            "地宫_1_阳光收集1_3"
         ]
     },
-    "land_gong_1_阳光收集1_3": {
+    "地宫_1_阳光收集1_3": {
         "action": "Swipe",
         "begin": [
             1027,
@@ -253,10 +1079,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪1_7"
+            "地宫_1_小怪_机枪1_7"
         ]
     },
-    "land_gong_1_小怪_机枪1_7": {
+    "地宫_1_小怪_机枪1_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -270,10 +1096,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波2"
+            "地宫_1_小怪_点波2"
         ]
     },
-    "land_gong_1_小怪_点波2": {
+    "地宫_1_小怪_点波2": {
         "action": "Click",
         "target": [
             1216,
@@ -282,10 +1108,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛2_1"
+            "地宫_1_小怪_草垛2_1"
         ]
     },
-    "land_gong_1_小怪_草垛2_1": {
+    "地宫_1_小怪_草垛2_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -299,10 +1125,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发2_2"
+            "地宫_1_小怪_双发2_2"
         ]
     },
-    "land_gong_1_小怪_双发2_2": {
+    "地宫_1_小怪_双发2_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -316,10 +1142,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿2_3"
+            "地宫_1_小怪_草垛仿2_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿2_3": {
+    "地宫_1_小怪_草垛仿2_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -333,10 +1159,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_火炬2_4"
+            "地宫_1_小怪_火炬2_4"
         ]
     },
-    "land_gong_1_小怪_火炬2_4": {
+    "地宫_1_小怪_火炬2_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -350,11 +1176,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_南瓜2_5"
+            "地宫_1_开始",
+            "地宫_1_小怪_南瓜2_5",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_小怪_南瓜2_5": {
+    "地宫_1_小怪_南瓜2_5": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             69,
@@ -368,10 +1199,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵2_6"
+            "地宫_1_小怪_向日葵2_6"
         ]
     },
-    "land_gong_1_小怪_向日葵2_6": {
+    "地宫_1_小怪_向日葵2_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -385,10 +1216,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪2_7"
+            "地宫_1_小怪_机枪2_7"
         ]
     },
-    "land_gong_1_小怪_机枪2_7": {
+    "地宫_1_小怪_机枪2_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -402,10 +1233,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波3"
+            "地宫_1_小怪_点波3"
         ]
     },
-    "land_gong_1_小怪_点波3": {
+    "地宫_1_小怪_点波3": {
         "action": "Click",
         "target": [
             1216,
@@ -414,10 +1245,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛3_1"
+            "地宫_1_小怪_草垛3_1"
         ]
     },
-    "land_gong_1_小怪_草垛3_1": {
+    "地宫_1_小怪_草垛3_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -431,10 +1262,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发3_2"
+            "地宫_1_小怪_双发3_2"
         ]
     },
-    "land_gong_1_小怪_双发3_2": {
+    "地宫_1_小怪_双发3_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -448,10 +1279,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿3_3"
+            "地宫_1_小怪_草垛仿3_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿3_3": {
+    "地宫_1_小怪_草垛仿3_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -465,10 +1296,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_火炬3_4"
+            "地宫_1_小怪_火炬3_4"
         ]
     },
-    "land_gong_1_小怪_火炬3_4": {
+    "地宫_1_小怪_火炬3_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -482,10 +1313,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜3_5"
+            "地宫_1_小怪_南瓜3_5"
         ]
     },
-    "land_gong_1_小怪_南瓜3_5": {
+    "地宫_1_小怪_南瓜3_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -499,10 +1330,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集2"
+            "地宫_1_阳光收集2"
         ]
     },
-    "land_gong_1_阳光收集2": {
+    "地宫_1_阳光收集2": {
         "action": "Swipe",
         "begin": [
             823,
@@ -518,10 +1349,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集2_2"
+            "地宫_1_阳光收集2_2",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_阳光收集2_2": {
+    "地宫_1_阳光收集2_2": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             924,
@@ -535,10 +1372,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集2_3"
+            "地宫_1_阳光收集2_3"
         ]
     },
-    "land_gong_1_阳光收集2_3": {
+    "地宫_1_阳光收集2_3": {
         "action": "Swipe",
         "begin": [
             1027,
@@ -552,10 +1389,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵3_6"
+            "地宫_1_小怪_向日葵3_6"
         ]
     },
-    "land_gong_1_小怪_向日葵3_6": {
+    "地宫_1_小怪_向日葵3_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -569,10 +1406,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪3_7"
+            "地宫_1_小怪_机枪3_7"
         ]
     },
-    "land_gong_1_小怪_机枪3_7": {
+    "地宫_1_小怪_机枪3_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -586,10 +1423,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波4"
+            "地宫_1_小怪_点波4"
         ]
     },
-    "land_gong_1_小怪_点波4": {
+    "地宫_1_小怪_点波4": {
         "action": "Click",
         "target": [
             1216,
@@ -598,10 +1435,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛4_1"
+            "地宫_1_小怪_草垛4_1"
         ]
     },
-    "land_gong_1_小怪_草垛4_1": {
+    "地宫_1_小怪_草垛4_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -615,10 +1452,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发4_2"
+            "地宫_1_小怪_双发4_2"
         ]
     },
-    "land_gong_1_小怪_双发4_2": {
+    "地宫_1_小怪_双发4_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -632,10 +1469,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿4_3"
+            "地宫_1_小怪_草垛仿4_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿4_3": {
+    "地宫_1_小怪_草垛仿4_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -649,10 +1486,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_火炬4_4"
+            "地宫_1_小怪_火炬4_4"
         ]
     },
-    "land_gong_1_小怪_火炬4_4": {
+    "地宫_1_小怪_火炬4_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -666,11 +1503,11 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_南瓜4_5"
+            "地宫_1_开始",
+            "地宫_1_小怪_南瓜4_5"
         ]
     },
-    "land_gong_1_小怪_南瓜4_5": {
+    "地宫_1_小怪_南瓜4_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -684,10 +1521,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵4_6"
+            "地宫_1_小怪_向日葵4_6"
         ]
     },
-    "land_gong_1_小怪_向日葵4_6": {
+    "地宫_1_小怪_向日葵4_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -701,10 +1538,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集3"
+            "地宫_1_阳光收集3"
         ]
     },
-    "land_gong_1_阳光收集3": {
+    "地宫_1_阳光收集3": {
         "action": "Swipe",
         "begin": [
             823,
@@ -720,10 +1557,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集3_2"
+            "地宫_1_阳光收集3_2",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_阳光收集3_2": {
+    "地宫_1_阳光收集3_2": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             924,
@@ -737,10 +1580,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集3_3"
+            "地宫_1_阳光收集3_3"
         ]
     },
-    "land_gong_1_阳光收集3_3": {
+    "地宫_1_阳光收集3_3": {
         "action": "Swipe",
         "begin": [
             1027,
@@ -754,10 +1597,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪4_7"
+            "地宫_1_小怪_机枪4_7"
         ]
     },
-    "land_gong_1_小怪_机枪4_7": {
+    "地宫_1_小怪_机枪4_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -771,10 +1614,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波5"
+            "地宫_1_小怪_点波5"
         ]
     },
-    "land_gong_1_小怪_点波5": {
+    "地宫_1_小怪_点波5": {
         "action": "Click",
         "target": [
             1216,
@@ -783,10 +1626,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛5_1"
+            "地宫_1_小怪_草垛5_1"
         ]
     },
-    "land_gong_1_小怪_草垛5_1": {
+    "地宫_1_小怪_草垛5_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -800,10 +1643,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发5_2"
+            "地宫_1_小怪_双发5_2"
         ]
     },
-    "land_gong_1_小怪_双发5_2": {
+    "地宫_1_小怪_双发5_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -817,10 +1660,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿5_3"
+            "地宫_1_小怪_草垛仿5_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿5_3": {
+    "地宫_1_小怪_草垛仿5_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -834,10 +1677,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_火炬5_4"
+            "地宫_1_小怪_火炬5_4"
         ]
     },
-    "land_gong_1_小怪_火炬5_4": {
+    "地宫_1_小怪_火炬5_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -851,10 +1694,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜5_5"
+            "地宫_1_小怪_南瓜5_5"
         ]
     },
-    "land_gong_1_小怪_南瓜5_5": {
+    "地宫_1_小怪_南瓜5_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -868,10 +1711,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵5_6"
+            "地宫_1_小怪_向日葵5_6"
         ]
     },
-    "land_gong_1_小怪_向日葵5_6": {
+    "地宫_1_小怪_向日葵5_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -885,10 +1728,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪5_7"
+            "地宫_1_小怪_机枪5_7"
         ]
     },
-    "land_gong_1_小怪_机枪5_7": {
+    "地宫_1_小怪_机枪5_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -902,10 +1745,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集4"
+            "地宫_1_阳光收集4"
         ]
     },
-    "land_gong_1_阳光收集4": {
+    "地宫_1_阳光收集4": {
         "action": "Swipe",
         "begin": [
             823,
@@ -921,10 +1764,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集4_2"
+            "地宫_1_阳光收集4_2"
         ]
     },
-    "land_gong_1_阳光收集4_2": {
+    "地宫_1_阳光收集4_2": {
         "action": "Swipe",
         "begin": [
             924,
@@ -938,10 +1781,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集4_3"
+            "地宫_1_阳光收集4_3",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_阳光收集4_3": {
+    "地宫_1_阳光收集4_3": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             1027,
@@ -955,10 +1804,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波6"
+            "地宫_1_小怪_点波6"
         ]
     },
-    "land_gong_1_小怪_点波6": {
+    "地宫_1_小怪_点波6": {
         "action": "Click",
         "target": [
             1216,
@@ -967,10 +1816,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛6_1"
+            "地宫_1_小怪_草垛6_1"
         ]
     },
-    "land_gong_1_小怪_草垛6_1": {
+    "地宫_1_小怪_草垛6_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -984,10 +1833,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发6_2"
+            "地宫_1_小怪_双发6_2"
         ]
     },
-    "land_gong_1_小怪_双发6_2": {
+    "地宫_1_小怪_双发6_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1001,10 +1850,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿6_3"
+            "地宫_1_小怪_草垛仿6_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿6_3": {
+    "地宫_1_小怪_草垛仿6_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1018,10 +1867,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_火炬6_4"
+            "地宫_1_小怪_火炬6_4"
         ]
     },
-    "land_gong_1_小怪_火炬6_4": {
+    "地宫_1_小怪_火炬6_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1035,11 +1884,11 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_南瓜1_6_5"
+            "地宫_1_开始",
+            "地宫_1_小怪_南瓜1_6_5"
         ]
     },
-    "land_gong_1_小怪_南瓜1_6_5": {
+    "地宫_1_小怪_南瓜1_6_5": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1053,10 +1902,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜2_6_6"
+            "地宫_1_小怪_南瓜2_6_6"
         ]
     },
-    "land_gong_1_小怪_南瓜2_6_6": {
+    "地宫_1_小怪_南瓜2_6_6": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1070,10 +1919,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵6_7"
+            "地宫_1_小怪_向日葵6_7"
         ]
     },
-    "land_gong_1_小怪_向日葵6_7": {
+    "地宫_1_小怪_向日葵6_7": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1087,10 +1936,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪6_8"
+            "地宫_1_小怪_机枪6_8"
         ]
     },
-    "land_gong_1_小怪_机枪6_8": {
+    "地宫_1_小怪_机枪6_8": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1104,10 +1953,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波7"
+            "地宫_1_小怪_点波7"
         ]
     },
-    "land_gong_1_小怪_点波7": {
+    "地宫_1_小怪_点波7": {
         "action": "Click",
         "target": [
             1216,
@@ -1116,10 +1965,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛7_1"
+            "地宫_1_小怪_草垛7_1"
         ]
     },
-    "land_gong_1_小怪_草垛7_1": {
+    "地宫_1_小怪_草垛7_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1133,10 +1982,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发7_2"
+            "地宫_1_小怪_双发7_2"
         ]
     },
-    "land_gong_1_小怪_双发7_2": {
+    "地宫_1_小怪_双发7_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1150,10 +1999,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿7_3"
+            "地宫_1_小怪_草垛仿7_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿7_3": {
+    "地宫_1_小怪_草垛仿7_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1167,10 +2016,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_7_4"
+            "地宫_1_小怪_南瓜1_7_4"
         ]
     },
-    "land_gong_1_小怪_南瓜1_7_4": {
+    "地宫_1_小怪_南瓜1_7_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1184,10 +2033,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜2_7_5"
+            "地宫_1_小怪_南瓜2_7_5",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_小怪_南瓜2_7_5": {
+    "地宫_1_小怪_南瓜2_7_5": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             69,
@@ -1201,10 +2056,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵7_6"
+            "地宫_1_小怪_向日葵7_6"
         ]
     },
-    "land_gong_1_小怪_向日葵7_6": {
+    "地宫_1_小怪_向日葵7_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1218,10 +2073,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪7_7"
+            "地宫_1_小怪_机枪7_7"
         ]
     },
-    "land_gong_1_小怪_机枪7_7": {
+    "地宫_1_小怪_机枪7_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1235,10 +2090,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波8"
+            "地宫_1_小怪_点波8"
         ]
     },
-    "land_gong_1_小怪_点波8": {
+    "地宫_1_小怪_点波8": {
         "action": "Click",
         "target": [
             1216,
@@ -1247,10 +2102,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛8_1"
+            "地宫_1_小怪_草垛8_1"
         ]
     },
-    "land_gong_1_小怪_草垛8_1": {
+    "地宫_1_小怪_草垛8_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1264,10 +2119,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发8_2"
+            "地宫_1_小怪_双发8_2"
         ]
     },
-    "land_gong_1_小怪_双发8_2": {
+    "地宫_1_小怪_双发8_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1281,10 +2136,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿8_3"
+            "地宫_1_小怪_草垛仿8_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿8_3": {
+    "地宫_1_小怪_草垛仿8_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1298,10 +2153,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集5"
+            "地宫_1_阳光收集5"
         ]
     },
-    "land_gong_1_阳光收集5": {
+    "地宫_1_阳光收集5": {
         "action": "Swipe",
         "begin": [
             823,
@@ -1317,10 +2172,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集5_2"
+            "地宫_1_阳光收集5_2"
         ]
     },
-    "land_gong_1_阳光收集5_2": {
+    "地宫_1_阳光收集5_2": {
         "action": "Swipe",
         "begin": [
             924,
@@ -1334,10 +2189,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集5_3"
+            "地宫_1_阳光收集5_3"
         ]
     },
-    "land_gong_1_阳光收集5_3": {
+    "地宫_1_阳光收集5_3": {
         "action": "Swipe",
         "begin": [
             1027,
@@ -1351,10 +2206,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_8_4"
+            "地宫_1_小怪_南瓜1_8_4"
         ]
     },
-    "land_gong_1_小怪_南瓜1_8_4": {
+    "地宫_1_小怪_南瓜1_8_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1368,11 +2223,11 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_南瓜2_8_5"
+            "地宫_1_开始",
+            "地宫_1_小怪_南瓜2_8_5"
         ]
     },
-    "land_gong_1_小怪_南瓜2_8_5": {
+    "地宫_1_小怪_南瓜2_8_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1386,10 +2241,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵8_6"
+            "地宫_1_小怪_向日葵8_6"
         ]
     },
-    "land_gong_1_小怪_向日葵8_6": {
+    "地宫_1_小怪_向日葵8_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1403,10 +2258,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪8_7"
+            "地宫_1_小怪_机枪8_7"
         ]
     },
-    "land_gong_1_小怪_机枪8_7": {
+    "地宫_1_小怪_机枪8_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1420,10 +2275,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波9"
+            "地宫_1_小怪_点波9"
         ]
     },
-    "land_gong_1_小怪_点波9": {
+    "地宫_1_小怪_点波9": {
         "action": "Click",
         "target": [
             1216,
@@ -1432,10 +2287,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛9_1"
+            "地宫_1_小怪_草垛9_1"
         ]
     },
-    "land_gong_1_小怪_草垛9_1": {
+    "地宫_1_小怪_草垛9_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1449,10 +2304,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发9_2"
+            "地宫_1_小怪_双发9_2"
         ]
     },
-    "land_gong_1_小怪_双发9_2": {
+    "地宫_1_小怪_双发9_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1466,10 +2321,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿9_3"
+            "地宫_1_小怪_草垛仿9_3",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_小怪_草垛仿9_3": {
+    "地宫_1_小怪_草垛仿9_3": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             56,
@@ -1483,10 +2344,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_9_4"
+            "地宫_1_小怪_南瓜1_9_4"
         ]
     },
-    "land_gong_1_小怪_南瓜1_9_4": {
+    "地宫_1_小怪_南瓜1_9_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1500,10 +2361,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜2_9_5"
+            "地宫_1_小怪_南瓜2_9_5"
         ]
     },
-    "land_gong_1_小怪_南瓜2_9_5": {
+    "地宫_1_小怪_南瓜2_9_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1517,10 +2378,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵9_6"
+            "地宫_1_小怪_向日葵9_6"
         ]
     },
-    "land_gong_1_小怪_向日葵9_6": {
+    "地宫_1_小怪_向日葵9_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1534,10 +2395,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪9_7"
+            "地宫_1_小怪_机枪9_7"
         ]
     },
-    "land_gong_1_小怪_机枪9_7": {
+    "地宫_1_小怪_机枪9_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1551,10 +2412,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波10"
+            "地宫_1_小怪_点波10"
         ]
     },
-    "land_gong_1_小怪_点波10": {
+    "地宫_1_小怪_点波10": {
         "action": "Click",
         "target": [
             1216,
@@ -1563,10 +2424,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛10_1"
+            "地宫_1_小怪_草垛10_1"
         ]
     },
-    "land_gong_1_小怪_草垛10_1": {
+    "地宫_1_小怪_草垛10_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1580,10 +2441,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发10_2"
+            "地宫_1_小怪_双发10_2"
         ]
     },
-    "land_gong_1_小怪_双发10_2": {
+    "地宫_1_小怪_双发10_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1597,10 +2458,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿10_3"
+            "地宫_1_小怪_草垛仿10_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿10_3": {
+    "地宫_1_小怪_草垛仿10_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1614,10 +2475,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_10_4"
+            "地宫_1_小怪_南瓜1_10_4"
         ]
     },
-    "land_gong_1_小怪_南瓜1_10_4": {
+    "地宫_1_小怪_南瓜1_10_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1631,10 +2492,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集6"
+            "地宫_1_阳光收集6"
         ]
     },
-    "land_gong_1_阳光收集6": {
+    "地宫_1_阳光收集6": {
         "action": "Swipe",
         "begin": [
             823,
@@ -1650,10 +2511,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集6_2"
+            "地宫_1_阳光收集6_2"
         ]
     },
-    "land_gong_1_阳光收集6_2": {
+    "地宫_1_阳光收集6_2": {
         "action": "Swipe",
         "begin": [
             924,
@@ -1667,10 +2528,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集6_3"
+            "地宫_1_阳光收集6_3"
         ]
     },
-    "land_gong_1_阳光收集6_3": {
+    "地宫_1_阳光收集6_3": {
         "action": "Swipe",
         "begin": [
             1027,
@@ -1684,10 +2545,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜2_10_5"
+            "地宫_1_小怪_南瓜2_10_5"
         ]
     },
-    "land_gong_1_小怪_南瓜2_10_5": {
+    "地宫_1_小怪_南瓜2_10_5": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1701,11 +2562,11 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_向日葵10_6"
+            "地宫_1_开始",
+            "地宫_1_小怪_向日葵10_6"
         ]
     },
-    "land_gong_1_小怪_向日葵10_6": {
+    "地宫_1_小怪_向日葵10_6": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1719,10 +2580,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪10_7"
+            "地宫_1_小怪_机枪10_7"
         ]
     },
-    "land_gong_1_小怪_机枪10_7": {
+    "地宫_1_小怪_机枪10_7": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1736,10 +2597,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波11"
+            "地宫_1_小怪_点波11"
         ]
     },
-    "land_gong_1_小怪_点波11": {
+    "地宫_1_小怪_点波11": {
         "action": "Click",
         "target": [
             1216,
@@ -1748,10 +2609,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛11_1"
+            "地宫_1_小怪_草垛11_1"
         ]
     },
-    "land_gong_1_小怪_草垛11_1": {
+    "地宫_1_小怪_草垛11_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1765,10 +2626,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发11_2"
+            "地宫_1_小怪_双发11_2"
         ]
     },
-    "land_gong_1_小怪_双发11_2": {
+    "地宫_1_小怪_双发11_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1782,10 +2643,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿11_3"
+            "地宫_1_小怪_草垛仿11_3",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_小怪_草垛仿11_3": {
+    "地宫_1_小怪_草垛仿11_3": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             56,
@@ -1799,10 +2666,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_11_4"
+            "地宫_1_小怪_南瓜1_11_4"
         ]
     },
-    "land_gong_1_小怪_南瓜1_11_4": {
+    "地宫_1_小怪_南瓜1_11_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1816,10 +2683,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵11_5"
+            "地宫_1_小怪_向日葵11_5"
         ]
     },
-    "land_gong_1_小怪_向日葵11_5": {
+    "地宫_1_小怪_向日葵11_5": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1833,10 +2700,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪11_6"
+            "地宫_1_小怪_机枪11_6"
         ]
     },
-    "land_gong_1_小怪_机枪11_6": {
+    "地宫_1_小怪_机枪11_6": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1850,10 +2717,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波12"
+            "地宫_1_小怪_点波12"
         ]
     },
-    "land_gong_1_小怪_点波12": {
+    "地宫_1_小怪_点波12": {
         "action": "Click",
         "target": [
             1216,
@@ -1862,10 +2729,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛12_1"
+            "地宫_1_小怪_草垛12_1"
         ]
     },
-    "land_gong_1_小怪_草垛12_1": {
+    "地宫_1_小怪_草垛12_1": {
         "action": "Swipe",
         "begin": [
             69,
@@ -1879,10 +2746,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发12_2"
+            "地宫_1_小怪_双发12_2"
         ]
     },
-    "land_gong_1_小怪_双发12_2": {
+    "地宫_1_小怪_双发12_2": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1896,10 +2763,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_草垛仿12_3"
+            "地宫_1_小怪_草垛仿12_3"
         ]
     },
-    "land_gong_1_小怪_草垛仿12_3": {
+    "地宫_1_小怪_草垛仿12_3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -1913,11 +2780,11 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_南瓜1_12_4"
+            "地宫_1_开始",
+            "地宫_1_小怪_南瓜1_12_4"
         ]
     },
-    "land_gong_1_小怪_南瓜1_12_4": {
+    "地宫_1_小怪_南瓜1_12_4": {
         "action": "Swipe",
         "begin": [
             71,
@@ -1931,10 +2798,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵12_5"
+            "地宫_1_小怪_向日葵12_5"
         ]
     },
-    "land_gong_1_小怪_向日葵12_5": {
+    "地宫_1_小怪_向日葵12_5": {
         "action": "Swipe",
         "begin": [
             75,
@@ -1948,10 +2815,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪12_6"
+            "地宫_1_小怪_机枪12_6"
         ]
     },
-    "land_gong_1_小怪_机枪12_6": {
+    "地宫_1_小怪_机枪12_6": {
         "action": "Swipe",
         "begin": [
             57,
@@ -1965,10 +2832,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集7"
+            "地宫_1_阳光收集7"
         ]
     },
-    "land_gong_1_阳光收集7": {
+    "地宫_1_阳光收集7": {
         "action": "Swipe",
         "begin": [
             823,
@@ -1984,10 +2851,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集7_2"
+            "地宫_1_阳光收集7_2"
         ]
     },
-    "land_gong_1_阳光收集7_2": {
+    "地宫_1_阳光收集7_2": {
         "action": "Swipe",
         "begin": [
             924,
@@ -2001,10 +2868,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_阳光收集7_3"
+            "地宫_1_阳光收集7_3"
         ]
     },
-    "land_gong_1_阳光收集7_3": {
+    "地宫_1_阳光收集7_3": {
         "action": "Swipe",
         "begin": [
             1027,
@@ -2018,10 +2885,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波13"
+            "地宫_1_小怪_点波13"
         ]
     },
-    "land_gong_1_小怪_点波13": {
+    "地宫_1_小怪_点波13": {
         "action": "Click",
         "target": [
             1216,
@@ -2030,10 +2897,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发13_1"
+            "地宫_1_小怪_双发13_1"
         ]
     },
-    "land_gong_1_小怪_双发13_1": {
+    "地宫_1_小怪_双发13_1": {
         "action": "Swipe",
         "begin": [
             56,
@@ -2047,10 +2914,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_13_2"
+            "地宫_1_小怪_南瓜1_13_2"
         ]
     },
-    "land_gong_1_小怪_南瓜1_13_2": {
+    "地宫_1_小怪_南瓜1_13_2": {
         "action": "Swipe",
         "begin": [
             71,
@@ -2064,10 +2931,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵13_3"
+            "地宫_1_小怪_向日葵13_3"
         ]
     },
-    "land_gong_1_小怪_向日葵13_3": {
+    "地宫_1_小怪_向日葵13_3": {
         "action": "Swipe",
         "begin": [
             75,
@@ -2081,10 +2948,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪13_4"
+            "地宫_1_小怪_机枪13_4"
         ]
     },
-    "land_gong_1_小怪_机枪13_4": {
+    "地宫_1_小怪_机枪13_4": {
         "action": "Swipe",
         "begin": [
             57,
@@ -2098,11 +2965,11 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_点波14"
+            "地宫_1_开始",
+            "地宫_1_小怪_点波14"
         ]
     },
-    "land_gong_1_小怪_点波14": {
+    "地宫_1_小怪_点波14": {
         "action": "Click",
         "target": [
             1216,
@@ -2111,10 +2978,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发14_1"
+            "地宫_1_小怪_双发14_1"
         ]
     },
-    "land_gong_1_小怪_双发14_1": {
+    "地宫_1_小怪_双发14_1": {
         "action": "Swipe",
         "begin": [
             56,
@@ -2128,10 +2995,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_14_2"
+            "地宫_1_小怪_南瓜1_14_2"
         ]
     },
-    "land_gong_1_小怪_南瓜1_14_2": {
+    "地宫_1_小怪_南瓜1_14_2": {
         "action": "Swipe",
         "begin": [
             71,
@@ -2145,10 +3012,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵14_3"
+            "地宫_1_小怪_向日葵14_3",
+            "地宫_1_开始",
+            "地宫1无尽_结算"
         ]
     },
-    "land_gong_1_小怪_向日葵14_3": {
+    "地宫_1_小怪_向日葵14_3": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "land_gong_one/加速.png"
+        ],
         "action": "Swipe",
         "begin": [
             75,
@@ -2162,10 +3035,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪14_4"
+            "地宫_1_小怪_机枪14_4"
         ]
     },
-    "land_gong_1_小怪_机枪14_4": {
+    "地宫_1_小怪_机枪14_4": {
         "action": "Swipe",
         "begin": [
             57,
@@ -2179,10 +3052,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_点波15"
+            "地宫_1_小怪_点波15"
         ]
     },
-    "land_gong_1_小怪_点波15": {
+    "地宫_1_小怪_点波15": {
         "action": "Click",
         "target": [
             1216,
@@ -2191,10 +3064,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_双发15_1"
+            "地宫_1_小怪_双发15_1"
         ]
     },
-    "land_gong_1_小怪_双发15_1": {
+    "地宫_1_小怪_双发15_1": {
         "action": "Swipe",
         "begin": [
             55,
@@ -2208,10 +3081,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_南瓜1_15_2"
+            "地宫_1_小怪_南瓜1_15_2"
         ]
     },
-    "land_gong_1_小怪_南瓜1_15_2": {
+    "地宫_1_小怪_南瓜1_15_2": {
         "action": "Swipe",
         "begin": [
             71,
@@ -2225,10 +3098,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_机枪15_3"
+            "地宫_1_小怪_机枪15_3"
         ]
     },
-    "land_gong_1_小怪_机枪15_3": {
+    "地宫_1_小怪_机枪15_3": {
         "action": "Swipe",
         "begin": [
             57,
@@ -2242,10 +3115,10 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_向日葵15_4"
+            "地宫_1_小怪_向日葵15_4"
         ]
     },
-    "land_gong_1_小怪_向日葵15_4": {
+    "地宫_1_小怪_向日葵15_4": {
         "action": "Swipe",
         "begin": [
             75,
@@ -2259,25 +3132,25 @@
         "post_delay": 0,
         "pre_delay": 0,
         "next": [
-            "land_gong_1_小怪_结束"
+            "地宫_1_小怪_结束"
         ]
     },
-    "land_gong_1_小怪_结束": {
+    "地宫_1_小怪_结束": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "land_gong_1_开始",
-            "land_gong_1_小怪_点波1"
+            "地宫_1_开始",
+            "地宫_1_小怪_点波1"
         ]
     },
-    "land_gong_1_boss关": {
+    "地宫_1_boss关": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "land_gong_1_boss关_点击开始"
+            "地宫_1_boss关_点击开始"
         ]
     },
-    "land_gong_1_boss关_点击开始": {
+    "地宫_1_boss关_点击开始": {
         "action": "Click",
         "target": [
             1165,
@@ -2285,10 +3158,10 @@
         ],
         "post_delay": 1000,
         "next": [
-            "land_gong_1_boss_草垛1"
+            "地宫_1_boss_草垛1"
         ]
     },
-    "land_gong_1_boss_草垛1": {
+    "地宫_1_boss_草垛1": {
         "action": "Swipe",
         "begin": [
             74,
@@ -2302,10 +3175,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛2"
+            "地宫_1_boss_草垛2"
         ]
     },
-    "land_gong_1_boss_草垛2": {
+    "地宫_1_boss_草垛2": {
         "action": "Swipe",
         "begin": [
             72,
@@ -2319,10 +3192,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛3"
+            "地宫_1_boss_草垛3"
         ]
     },
-    "land_gong_1_boss_草垛3": {
+    "地宫_1_boss_草垛3": {
         "action": "Swipe",
         "begin": [
             71,
@@ -2336,10 +3209,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛4"
+            "地宫_1_boss_草垛4"
         ]
     },
-    "land_gong_1_boss_草垛4": {
+    "地宫_1_boss_草垛4": {
         "action": "Swipe",
         "begin": [
             82,
@@ -2353,10 +3226,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛5"
+            "地宫_1_boss_草垛5"
         ]
     },
-    "land_gong_1_boss_草垛5": {
+    "地宫_1_boss_草垛5": {
         "action": "Swipe",
         "begin": [
             73,
@@ -2370,10 +3243,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛6"
+            "地宫_1_boss_草垛6"
         ]
     },
-    "land_gong_1_boss_草垛6": {
+    "地宫_1_boss_草垛6": {
         "action": "Swipe",
         "begin": [
             72,
@@ -2387,10 +3260,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛7"
+            "地宫_1_boss_草垛7"
         ]
     },
-    "land_gong_1_boss_草垛7": {
+    "地宫_1_boss_草垛7": {
         "action": "Swipe",
         "begin": [
             74,
@@ -2404,10 +3277,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛8"
+            "地宫_1_boss_草垛8"
         ]
     },
-    "land_gong_1_boss_草垛8": {
+    "地宫_1_boss_草垛8": {
         "action": "Swipe",
         "begin": [
             68,
@@ -2421,10 +3294,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛9"
+            "地宫_1_boss_草垛9"
         ]
     },
-    "land_gong_1_boss_草垛9": {
+    "地宫_1_boss_草垛9": {
         "action": "Swipe",
         "begin": [
             74,
@@ -2438,10 +3311,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_草垛10"
+            "地宫_1_boss_草垛10"
         ]
     },
-    "land_gong_1_boss_草垛10": {
+    "地宫_1_boss_草垛10": {
         "action": "Swipe",
         "begin": [
             71,
@@ -2455,10 +3328,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪1"
+            "地宫_1_boss_机枪1"
         ]
     },
-    "land_gong_1_boss_机枪1": {
+    "地宫_1_boss_机枪1": {
         "action": "Swipe",
         "begin": [
             68,
@@ -2472,10 +3345,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪2"
+            "地宫_1_boss_机枪2"
         ]
     },
-    "land_gong_1_boss_机枪2": {
+    "地宫_1_boss_机枪2": {
         "action": "Swipe",
         "begin": [
             67,
@@ -2489,10 +3362,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪3"
+            "地宫_1_boss_机枪3"
         ]
     },
-    "land_gong_1_boss_机枪3": {
+    "地宫_1_boss_机枪3": {
         "action": "Swipe",
         "begin": [
             56,
@@ -2506,10 +3379,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪4"
+            "地宫_1_boss_机枪4"
         ]
     },
-    "land_gong_1_boss_机枪4": {
+    "地宫_1_boss_机枪4": {
         "action": "Swipe",
         "begin": [
             74,
@@ -2523,10 +3396,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪5"
+            "地宫_1_boss_机枪5"
         ]
     },
-    "land_gong_1_boss_机枪5": {
+    "地宫_1_boss_机枪5": {
         "action": "Swipe",
         "begin": [
             72,
@@ -2540,10 +3413,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪6"
+            "地宫_1_boss_机枪6"
         ]
     },
-    "land_gong_1_boss_机枪6": {
+    "地宫_1_boss_机枪6": {
         "action": "Swipe",
         "begin": [
             73,
@@ -2557,10 +3430,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪7"
+            "地宫_1_boss_机枪7"
         ]
     },
-    "land_gong_1_boss_机枪7": {
+    "地宫_1_boss_机枪7": {
         "action": "Swipe",
         "begin": [
             63,
@@ -2574,10 +3447,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪8"
+            "地宫_1_boss_机枪8"
         ]
     },
-    "land_gong_1_boss_机枪8": {
+    "地宫_1_boss_机枪8": {
         "action": "Swipe",
         "begin": [
             56,
@@ -2591,10 +3464,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪9"
+            "地宫_1_boss_机枪9"
         ]
     },
-    "land_gong_1_boss_机枪9": {
+    "地宫_1_boss_机枪9": {
         "action": "Swipe",
         "begin": [
             73,
@@ -2608,10 +3481,10 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_机枪10"
+            "地宫_1_boss_机枪10"
         ]
     },
-    "land_gong_1_boss_机枪10": {
+    "地宫_1_boss_机枪10": {
         "action": "Swipe",
         "begin": [
             72,
@@ -2625,11 +3498,11 @@
         "pre_delay": 0,
         "post_delay": 0,
         "next": [
-            "land_gong_1_boss_检查3",
-            "land_gong_1_boss_草垛1"
+            "地宫_1_boss_检查3",
+            "地宫_1_boss_草垛1"
         ]
     },
-    "land_gong_1_boss_检查3": {
+    "地宫_1_boss_检查3": {
         "recognition": "OCR",
         "expected": "开始战斗",
         "roi": [
@@ -2640,9 +3513,26 @@
         ],
         "action": "DoNothing",
         "next": [
-            "land_gong_1_开始"
+            "地宫_1_开始"
         ],
         "timeout": -1,
         "rate_limit": 100
-    }
+    },
+    "地宫1无尽_结算": {
+        "recognition": "OCR",
+        "expected": [
+            "确定"
+        ],
+        "roi": [
+            542,
+            580,
+            213,
+            88
+        ],
+        "action": "Click",
+        "next": [
+            "地宫1无尽_无尽模式",
+            "地宫1无尽_结算"
+        ]
+    },
 }
