@@ -1,0 +1,93 @@
+{
+    "执行每日50钻": {
+        "timeout": 5000,
+        "recognition": "TemplateMatch",
+        "template": [
+            "Daily_Diamonds_Free_Version/钻石.png"
+        ],
+        "target": [
+            906,
+            2,
+            51,
+            51
+        ],
+        "method": 10001,
+        "threshold": [
+            0.7999999
+        ],
+        "post_delay": 500,
+        "focus": "领取钻石",
+        "green_mask": true,
+        "action": "Click",
+        "next": [
+            "领取钻石",
+            "领取钻石_确定",
+            "有免广告卡_前置检查"
+        ]
+    },
+    "领取钻石": {
+        "timeout": 5000,
+        "max_hit": 10,
+        "recognition": "And",
+        "all_of": [
+            {
+                "recognition": "TemplateMatch",
+                "template": [
+                    "Daily_Diamonds_Free_Version/领取钻石.png"
+                ],
+                "threshold": [
+                    0.7
+                ],
+                "roi": [
+                    273,
+                    464,
+                    161,
+                    71
+                ],
+                "method": 10001,
+            },
+            {
+                "recognition": "ColorMatch",
+                "lower": [
+                    41,
+                    219,
+                    41
+                ],
+                "upper": [
+                    82,
+                    227,
+                    82
+                ],
+                "roi": [
+                    273,
+                    464,
+                    161,
+                    71
+                ],
+            }
+        ],
+        "action": "Click",
+        "target": [
+            329,
+            473,
+            51,
+            51
+        ],
+        "next": [
+            "领取钻石_确定",
+            "领取钻石",
+        ],
+    },
+    "领取钻石_确定": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "Daily_Diamonds_Free_Version/领取钻石_确定.png"
+        ],
+        "post_wait_freezes": 500,
+        "action": "Click",
+        "next": [
+            "领取钻石",
+            "有免广告卡_前置检查"
+        ]
+    }
+}

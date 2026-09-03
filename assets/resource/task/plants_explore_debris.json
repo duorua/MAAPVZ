@@ -328,7 +328,7 @@
                 }
             ]
         },
-        "海底世界": {
+        "海底/月球": {
             "type": "checkbox",
             "cases": [
                 {
@@ -346,6 +346,43 @@
                             "enabled": true
                         }
                     }
+                },
+                {
+                    "name": "宇宙豌豆",
+                    "pipeline_override": {
+                        "探索_宇宙豌豆": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "重力树",
+                    "pipeline_override": {
+                        "探索_重力树": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
+        },
+        "双倍碎片（需要免广告卡）": {
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "点击探险完成": {
+                            "next": [
+                                "植物探险_使用免广告卡",
+                                "完成探险",
+                                "点击探险完成"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "No"
                 }
             ]
         }

@@ -1,83 +1,123 @@
-name: Build and Release
+name: install
 
 on:
   push:
     branches:
-      - main
-    tags:
-      - 'v*'
+      - "**"
+    paths:
+      - ".github/workflows/install.yml"
+      - ".github/cliff.toml"
+      - "assets/**"
+      - "agent/**"
+      - "tools/**"
+      - "**.py"
+      - "requirements.txt"
+      - "docs/imgs/**"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/install.yml"
+      - ".github/cliff.toml"
+      - "assets/**"
+      - "agent/**"
+      - "tools/**"
+      - "**.py"
+      - "requirements.txt"
+      - "docs/imgs/**"
   workflow_dispatch:
+    inputs:
+      version:
+        description: Artifact version (leave empty to use the CI version)
+        required: false
+        type: string
+  workflow_call:
+    inputs:
+      version:
+        description: Version used in artifact names
+        required: true
+        type: string
+
+concurrency:
+  group: install-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 env:
-  MFAA_VERSION: v2.12.1
-  MAA_FRAMEWORK_VERSION: v5.10.4
+  MFAA_VERSION: v2.16.0
+  MAA_FRAMEWORK_VERSION: v5.12.2
 
 jobs:
   meta:
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.set_tag.outputs.tag }}
-      is_release: ${{ steps.set_tag.outputs.is_release }}
-      is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
+          fetch-tags: true
       - id: set_tag
         run: |
-          is_release=false
-          is_prerelease=false
-          tag=""
-
-          # 只处理 push 到 main 分支的事件(commit 触发)
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
-            FIRST_LINE=$(echo "${{ github.event.head_commit.message }}" | head -n1)
-            if [[ "$FIRST_LINE" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-              VERSION=$(echo "$FIRST_LINE" | grep -oE '^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?')
-              if [ -n "$VERSION" ]; then
-                is_release=true
-                tag="$VERSION"
-                if [[ "$VERSION" =~ -(alpha|beta|rc|pre|preview) ]]; then
-                  is_prerelease=true
-                fi
-              fi
-            fi
+          requested_version="${{ inputs.version }}"
+          if [[ -n "$requested_version" ]]; then
+            echo "tag=$requested_version" | tee -a "$GITHUB_OUTPUT"
+            exit 0
           fi
 
-          # 无有效版本号时生成 CI 标签(不发布)
-          if [ -z "$tag" ]; then
-            tag="ci-$(date +%y%m%d)"
+          latest_tag=$(git describe --tags --match "v*" --abbrev=0 2>/dev/null || true)
+          if [[ "$latest_tag" != v* ]]; then
+            latest_tag=$(curl -sX GET "https://api.github.com/repos/${{ github.repository }}/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | awk '/tag_name/{print $4}' FS='["]')
+          fi
+          if [[ "$latest_tag" != v* ]]; then
+            latest_tag="v0.0.0"
           fi
 
-          echo "tag=$tag" >> $GITHUB_OUTPUT
-          echo "is_release=$is_release" >> $GITHUB_OUTPUT
-          echo "is_prerelease=$is_prerelease" >> $GITHUB_OUTPUT
+          short_sha=$(git rev-parse --short HEAD)
+          date_str=$(date +%y%m%d)
+          tag="${latest_tag}-ci.${date_str}-${short_sha}"
 
-  create_tag:
-    needs: meta
-    if: ${{ needs.meta.outputs.is_release == 'true' }}
+          echo "tag=$tag" | tee -a "$GITHUB_OUTPUT"
+
+  changelog:
+    name: Generate changelog
+    needs: [meta]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Create and push tag
+          fetch-tags: true
+          ref: ${{ github.ref }}
+
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: .github/cliff.toml
+          args: >-
+            -vv --latest --strip header
+        env:
+          OUTPUT: CHANGES.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Write changelog to announcement file
         run: |
-          TAG="${{ needs.meta.outputs.tag }}"
-          # 检查远程是否已存在该 tag
-          if git ls-remote --tags origin | grep -q "refs/tags/${TAG}$"; then
-            echo "Tag ${TAG} already exists remotely, skipping creation."
-          else
-            git tag "${TAG}"
-            git push origin "${TAG}"
-            echo "Tag ${TAG} created and pushed."
-          fi
+         mkdir -p announcement
+         cp CHANGES.md announcement/
+
+      - name: Upload announcement artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: announcement
+          path: announcement/
+          if-no-files-found: error
 
   install:
-    needs: meta
+    needs: [meta, changelog]
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
@@ -90,10 +130,10 @@ jobs:
             runner: windows-11-arm
           - os: macos
             arch: x86_64
-            runner: ubuntu-latest
+            runner: macos-15-intel
           - os: macos
             arch: aarch64
-            runner: ubuntu-latest
+            runner: macos-latest
           - os: linux
             arch: x86_64
             runner: ubuntu-latest
@@ -106,6 +146,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Download announcement artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: announcement
+          path: assets/resource/announcement
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -248,8 +293,9 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: MaaPVZ-${{ matrix.os }}-${{ matrix.arch }}
+          name: MaaPVZ-${{ matrix.os }}-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
           path: "install"
+          if-no-files-found: error
 
   changelog:
     name: Generate changelog
@@ -330,3 +376,4 @@ jobs:
           gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

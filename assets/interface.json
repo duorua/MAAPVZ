@@ -32,26 +32,45 @@
                 "./resource"
             ],
             "option": [
-                "渠道服"
+                "渠道服",
+                "高级设置"
             ]
         }
     ],
     "import": [
+        // 根目录 task 下的通用功能
         "./resource/task/plants_explore_debris.json",
         "./resource/task/fragment_challenge.json",
         "./resource/task/get_gold_coins.json",
-        "./resource/task/Start_game.json",
+        "./resource/task/Start_game/Start_game.json",
+        "./resource/task/Start_game/Start_game_too.json",
         "./resource/task/Secret_realm.json",
-        "./resource/task/Endless.json",
         "./resource/task/pair_duel.json",
         "./resource/task/mini_tools.json",
-        "./resource/task/test.json"
+        "./resource/task/test.json",
+        "./resource/task/video_card.json",
+        // Endless 子目录
+        "./resource/task/Endless/Endless.json", // 顶层入口
+        "./resource/task/Endless/Endless_plant.json", // 预设选择器
+        "./resource/task/Endless/Endless_auto_loop.json", // 全自动循环
+        // framework 通用模块
+        "./resource/task/Endless/framework/custom/frame_custom.json", // 自定义布阵
+        "./resource/task/Endless/framework/frame/Recognition.json", // 识别
+        "./resource/task/Endless/framework/frame/Flower.json", // 抛花
+        "./resource/task/Endless/framework/frame/Patch_Plants.json", // 补植物
+        "./resource/task/Endless/framework/frame/Magic_Gan.json", // 魔甘收尾
+        "./resource/task/Endless/framework/frame/option.json", // 其他通用选项
+        // preset 预设
+        "./resource/task/Endless/preset/yuan_big/preset_yuan_big.json", // 原大桑葚
+        "./resource/task/Endless/preset/heart_tower/preset_heart_tower.json", // 心叶兰塔黄
+        "./resource/task/Endless/preset/banana_tower/preset_banana_tower.json" // 塔黄香蕉
     ],
     "task": [
         {
             "name": "开始登录",
             "entry": "选择渠道服",
             "option": [
+                "存档覆盖进度",
                 "重复启动时黑屏请打开"
             ],
             "resource": [
@@ -80,7 +99,7 @@
                 "摇滚/恐龙",
                 "摩登/蒸汽",
                 "平安/复兴",
-                "海底世界"
+                "海底/月球"
             ],
             "description": "先领取奖励，再进行探险"
         },
@@ -113,16 +132,11 @@
             ]
         },
         {
-            "name": "旅行原木（测试）",
-            "entry": "旅行原木_前置检查",
-            "default_check": true
-        },
-        {
             "name": "刷胜场/金币（测试）",
-            "entry": "埃及第一关刷金币_前置检查",
+            "entry": "刷金币_前置检查",
             "description": "不要给仙人掌带超级装扮",
             "option": [
-                "刷金币模式选择"
+                "需要刷的关卡",
             ]
         },
         {
@@ -142,30 +156,149 @@
             "name": "无尽挑战（测试）",
             "entry": "无尽挑战_前置检查",
             "option": [
-                "当期无尽模式"
+                "无尽全自动循环",
+                "无尽模式"
             ]
         },
         {
-            "name": "戴夫杯（测试）",
-            "entry": "Dai_Enter",
-            "default_check": false,
-            "description": "在匹配界面开脚本"
+            "name": "创意庭院",
+            "description": "使用期间需要保证剪切板不复制粘贴别的东西",
+            "option": [
+                "刷取类型"
+            ],
+            "entry": "创意庭院_前置检查"
         },
         {
-            "name": "双人对决（已禁用）",
+            "name": "旅行原木（测试）",
+            "entry": "旅行原木_前置检查",
+            "default_check": true
+        },
+        {
+            "name": "双人对决",
             "entry": "双人对决_前置检查",
+            "pipeline_override": {
+                "打开pvz_官服": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_自定义包": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_华为": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_联想": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_360": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_九游": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_OPPO": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_应用宝_qq": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_应用宝_微信": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_b服": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_vivo": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_荣耀": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_好游快报": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_百度": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_7723": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_taptap": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_4399": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                },
+                "打开pvz_XM": {
+                    "next": [
+                        "识别是否掉血",
+                        "返回桌面"
+                    ]
+                }
+            },
             "resource": [
                 "PVZ_2_国服通用"
             ],
             "option": [
                 "配置模式",
                 "匹配模式",
+                "每次卡双赢的间隔时间",
                 "到达特定回合释放特定的僵尸",
                 "僵尸强化buff",
                 "放置3阶5阶植物",
                 "额外弹窗直接关闭"
             ],
-            "description": "擅自开启造成的后果概不负责"
+            "description": "由于是卡bug性质的，所以不要在公开平台跳脸或宣传此功能，用不了的话去看自己的资源预设配置-渠道服有没有选对"
         },
         {
             "name": "小工具",
@@ -184,106 +317,113 @@
             "description": "清理多余的日志,节省空间"
         },
         {
-            "name": "创意庭院（不要开启）",
-            "entry": "创意庭院_前置检查"
+            "name": "登录其他渠道服",
+            "entry": "选择渠道服_其他",
+            "option": [
+                "渠道服_其他"
+            ],
+            "default_check": false,
+            "description": "登录其他渠道服"
         },
         {
             "name": "dbug（不要开启）",
-            "entry": "地宫1无尽_无尽模式"
+            "entry": "创意庭院_删除关卡_点刷罐子"
         }
     ],
     "option": {
-        "双倍碎片（需要免广告卡）": {
-            "type": "switch",
-            "default_case": "No",
-            "cases": [
-                {
-                    "name": "Yes",
-                    "pipeline_override": {
-                        "点击探险完成": {
-                            "next": [
-                                "植物探险_使用免广告卡",
-                                "完成探险"
-                            ]
-                        },
-                    }
-                },
-                {
-                    "name": "No"
-                }
-            ]
-        },
-        "每日免费五十钻": {
-            "type": "switch",
-            "cases": [
-                {
-                    "name": "No"
-                },
-                {
-                    "name": "Yes",
-                    "pipeline_override": {
-                        "免广告卡_免费每日50钻": {
-                            "enabled": true,
-                        }
-                    }
-                }
-            ]
-        },
-        "潘妮秘宝": {
-            "type": "switch",
-            "cases": [
-                {
-                    "name": "No"
-                },
-                {
-                    "name": "Yes",
-                    "option": [
-                        "潘妮秘宝选择宝箱",
-                        "潘妮秘宝使用几次免广告卡"
-                    ],
-                    "pipeline_override": {
-                        "免广告卡_潘妮秘宝": {
-                            "enabled": true,
-                        }
-                    }
-                }
-            ]
-        },
-        "潘妮秘宝选择宝箱": {
+        "刷取类型": {
             "type": "select",
             "cases": [
                 {
-                    "name": "普通宝箱"
+                    "name": "刷游玩币",
+                    "option": [
+                        "使用收藏关卡"
+                    ],
+                    "pipeline_override": {
+                        "创意庭院_刷币_点击游玩": {
+                            "enabled": true
+                        },
+                        "创意庭院_游玩_可刷取的代币已达上限": {
+                            "enabled": true
+                        },
+                        "创意庭院_刷币_删完关卡_退出": {
+                            "enabled": true
+                        }
+                    }
                 },
                 {
-                    "name": "装扮碎片宝箱",
+                    "name": "刷点赞",
+                    "option": [
+                        "点赞几次"
+                    ],
                     "pipeline_override": {
-                        "潘妮秘宝_免广告卡_点击秘宝": {
-                            "next": [
-                                "潘妮秘宝_免广告卡_装扮宝物_滑动"
-                            ]
+                        "创意庭院_刷赞_删除关卡": {
+                            "enabled": true
                         },
+                        "创意庭院_刷赞_创建关卡": {
+                            "enabled": true
+                        }
                     }
                 }
             ]
         },
-        "潘妮秘宝使用几次免广告卡": {
+        "点赞几次": {
             "type": "input",
             "inputs": [
                 {
-                    "name": "使用次数",
+                    "name": "点赞次数",
                     "pipeline_type": "int",
                     "default": "1",
-                    "verify": "^[1-9]\\d{0,1}$"
+                    "verify": "[1-9]\\d*$"
                 }
             ],
             "pipeline_override": {
-                "免广告卡_潘妮秘宝": {
-                    "max_hit": "{使用次数}",
-                },
+                "创意庭院_刷赞_重新创建关卡检测次数": {
+                    "max_hit": "{点赞次数}"
+                }
             }
         },
-        "超z钥匙": {
+        "使用收藏关卡": {
+            "type": "switch",
+            "default_case": "No",
+            "description": "使用第一个收藏的关卡",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "创意庭院_确认自己在创意庭院": {
+                            "next": [
+                                "创意庭院_使用收藏的关卡"
+                            ]
+                        },
+                        "创意庭院_游玩_点赞_确定2": {
+                            "next": [
+                                "创意庭院_游玩_等待结算"
+                            ]
+                        },
+                        "创意庭院_刷币_点击游玩": {
+                            "next": [
+                                "创意庭院_使用收藏的关卡"
+                            ]
+                        },
+                        "创意庭院_游玩_点赞": {
+                            "next": [
+                                "创意庭院_游玩_等待结算"
+                            ]
+                        },
+                        "创意庭院_游玩_可刷取的代币已达上限": {
+                            "next": [
+                                "创意庭院_游玩_收藏_可刷取的代币已达上限"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "No"
+                }
+            ]
+        },
+        "高级设置": {
             "type": "switch",
             "cases": [
                 {
@@ -291,217 +431,78 @@
                 },
                 {
                     "name": "Yes",
-                    "pipeline_override": {
-                        "免广告卡_超z钥匙": {
-                            "enabled": true,
-                        }
-                    }
-                }
-            ]
-        },
-        "渠道服": {
-            "type": "select",
-            "description": "选择你要进入的渠道服",
-            "cases": [
-                {
-                    "name": "联想",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_联想",
-                                "打开pvz_联想"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "4399",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_4399",
-                                "打开pvz_4399"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "小米",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_XM",
-                                "打开pvz_XM"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "应用宝",
                     "option": [
-                        "登录方式"
+                        "选卡相关"
                     ]
-                },
-                {
-                    "name": "b服",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_b服",
-                                "打开pvz_b服"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "荣耀",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_荣耀",
-                                "打开pvz_荣耀"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "vivo",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_vivo",
-                                "打开pvz_vivo"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "九游",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_九游",
-                                "打开pvz_九游"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "OPPO",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_OPPO",
-                                "打开pvz_OPPO"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "好游快报",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_好游快报",
-                                "打开pvz_好游快报"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "百度",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_百度",
-                                "打开pvz_百度"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "360",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_360",
-                                "打开pvz_360"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "华为",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_华为",
-                                "打开pvz_华为"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "7723",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_7723",
-                                "打开pvz_7723"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "taptap",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_taptap",
-                                "打开pvz_taptap"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "官服",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_官服",
-                                "打开pvz_官服"
-                            ]
-                        }
-                    }
                 }
             ]
         },
-        "登录方式": {
-            "type": "select",
+        "选卡相关": {
+            "type": "switch",
             "cases": [
                 {
-                    "name": "qq登录",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_应用宝_qq",
-                                "打开pvz_应用宝_qq"
-                            ]
-                        }
-                    }
+                    "name": "No"
                 },
                 {
-                    "name": "微信登录",
-                    "pipeline_override": {
-                        "选择渠道服": {
-                            "next": [
-                                "关闭pvz_应用宝_微信",
-                                "打开pvz_应用宝_微信"
-                            ]
-                        }
-                    }
+                    "name": "Yes",
+                    "option": [
+                        "选卡时滑动的持续时间",
+                        "选卡滑动后的按住屏幕时间",
+                        "选完植物时滑动到最顶上的时间"
+                    ]
                 }
             ]
+        },
+        "选完植物时滑动到最顶上的时间": {
+            "description": "单位为毫秒",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "滑动时间",
+                    "pipeline_type": "int",
+                    "default": "10",
+                    "verify": "[1-9]\\d*$"
+                }
+            ],
+            "pipeline_override": {
+                "滑回最顶上": {
+                    "duration": "{滑动时间}"
+                }
+            }
+        },
+        "选卡时滑动的持续时间": {
+            "description": "单位为毫秒",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "滑动时间",
+                    "pipeline_type": "int",
+                    "default": "200",
+                    "verify": "[1-9]\\d*$"
+                }
+            ],
+            "pipeline_override": {
+                "寻找植物_滑动": {
+                    "duration": "{滑动时间}"
+                }
+            }
+        },
+        "选卡滑动后的按住屏幕时间": {
+            "description": "单位为毫秒",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "滑动时间",
+                    "pipeline_type": "int",
+                    "default": "50",
+                    "verify": "[1-9]\\d*$"
+                }
+            ],
+            "pipeline_override": {
+                "寻找植物_滑动": {
+                    "end_hold": "{滑动时间}"
+                }
+            }
         }
     }
 }

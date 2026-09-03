@@ -13,6 +13,7 @@ if getattr(sys, 'frozen', False):
 else:
     ROOT_DIR = Path(__file__).parent.parent
 
+_screenshot_counter = {}
 _offset_state_map = {}
 _plant_states = {}
 SCREENSHOT_DIR = ROOT_DIR / "screenshots"
@@ -476,4 +477,203 @@ class ResetCounts(CustomAction):
         for plant_name, state in _plant_states.items():
             state["counts"] = {1: 0, 2: 0, 3: 0, 4: 0}
         print(f"[ResetCounts] 已重置所有植物的点击次数，保留运行次数")
+        return CustomAction.RunResult(success=True)
+    
+@AgentServer.custom_action("SaveScreenshot")
+class SaveScreenshot(CustomAction):
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
+        param = json.loads(argv.custom_action_param) if argv.custom_action_param else {}
+
+        # 如果提供了 filename，直接使用（兼容旧用法）
+        filename = param.get("filename")
+        fmt = param.get("format", "png").lower()
+        if fmt not in ("png", "jpg", "jpeg"):
+            fmt = "png"
+
+        # 如果未提供 filename，则使用 base_name 自动编号
+        if filename is None:
+            base_name = param.get("base_name", "screenshot")
+            count = _screenshot_counter.get(base_name, 0)
+            if count == 0:
+                file_name = base_name
+            else:
+                file_name = f"{base_name}{count}"
+            _screenshot_counter[base_name] = count + 1
+            file_name = f"{file_name}.{fmt}"
+        else:
+            if not filename.endswith(f".{fmt}"):
+                file_name = f"{filename}.{fmt}"
+            else:
+                file_name = filename
+
+        # 处理保存路径（支持相对路径自动拼接 ROOT_DIR）
+        save_dir = param.get("save_path", "./screenshots")
+        save_path = Path(save_dir)
+        if not save_path.is_absolute():
+            save_path = ROOT_DIR / save_path
+        save_path.mkdir(parents=True, exist_ok=True)
+        filepath = save_path / file_name
+
+        # 获取截图
+        image = context.tasker.controller.cached_image
+        if image is None:
+            return CustomAction.RunResult(success=False)
+
+        # 保存图片
+        rgb_image = image[..., ::-1]  # BGR -> RGB
+        Image.fromarray(rgb_image).save(str(filepath))
+        print(f"[SaveScreenshot] 已保存: {filepath}")
+        return CustomAction.RunResult(success=True)
+@AgentServer.custom_action("PasteClipboard")
+class PasteClipboard(CustomAction):
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
+        # ---------- 1. 确保 pyperclip 可用 ----------
+        try:
+            import pyperclip
+        except ImportError:
+            import subprocess, sys
+            print("[PasteClipboard] pyperclip 未安装，正在自动安装...")
+            try:
+                subprocess.check_call([sys.executable, "-m", "pip", "install", "pyperclip"])
+                import pyperclip
+                print("[PasteClipboard] pyperclip 安装成功")
+            except Exception as e:
+                print(f"[PasteClipboard] 自动安装失败: {e}")
+                return CustomAction.RunResult(success=False)
+
+        # ---------- 2. 读取剪贴板 ----------
+        try:
+            text = pyperclip.paste()
+        except Exception as e:
+            print(f"[PasteClipboard] 读取剪贴板失败: {e}")
+            return CustomAction.RunResult(success=False)
+
+        if not text:
+            print("[PasteClipboard] 剪贴板为空")
+            return CustomAction.RunResult(success=True)
+
+        # ---------- 3. 获取 ADB 信息 ----------
+        adb_path = None
+        adb_serial = None
+
+        # 3a. 尝试从控制器信息中获取（推荐）
+        try:
+            ctrl_info = context.tasker.controller.info
+            if isinstance(ctrl_info, dict):
+                adb_path = ctrl_info.get("adb_path")
+                adb_serial = ctrl_info.get("adb_serial")
+            else:
+                adb_path = getattr(ctrl_info, "adb_path", None)
+                adb_serial = getattr(ctrl_info, "adb_serial", None)
+        except Exception as e:
+            print(f"[PasteClipboard] 从控制器获取 ADB 信息失败: {e}")
+
+        # 3b. 如果失败，尝试从系统 PATH 中查找 adb
+        if not adb_path:
+            import shutil
+            adb_path = shutil.which("adb")
+            if not adb_path:
+                print("[PasteClipboard] 未找到 adb，请确保 adb 已安装并在 PATH 中")
+                return CustomAction.RunResult(success=False)
+
+        # 如果序列号仍未获取，尝试从 adb devices 自动获取（仅当只有一个设备时）
+        if not adb_serial:
+            import subprocess
+            try:
+                result = subprocess.run([adb_path, "devices"], capture_output=True, text=True)
+                lines = result.stdout.strip().split('\n')[1:]  # 跳过标题
+                devices = [line.split('\t')[0] for line in lines if line.strip() and 'device' in line]
+                if len(devices) == 1:
+                    adb_serial = devices[0]
+                    print(f"[PasteClipboard] 自动检测到设备: {adb_serial}")
+                elif len(devices) > 1:
+                    print("[PasteClipboard] 检测到多个设备，请手动指定序列号")
+                    # 这里可以继续执行，但可能出错，由用户自行选择
+                else:
+                    print("[PasteClipboard] 未检测到已连接的设备")
+                    return CustomAction.RunResult(success=False)
+            except Exception as e:
+                print(f"[PasteClipboard] 自动检测设备失败: {e}")
+
+        # ---------- 4. 转义文本 ----------
+        escaped = text.replace('\\', '\\\\').replace('"', '\\"')
+        escaped = escaped.replace('\r\n', ' ').replace('\n', ' ')
+        if len(escaped) > 3800:
+            print(f"[PasteClipboard] 文本过长，截断至 3800 字符")
+            escaped = escaped[:3800]
+
+        # ---------- 5. 执行 ADB 命令 ----------
+        if adb_serial:
+            cmd = f'"{adb_path}" -s {adb_serial} shell input text "{escaped}"'
+        else:
+            cmd = f'"{adb_path}" shell input text "{escaped}"'
+        print(f"[PasteClipboard] 执行命令: {cmd[:200]}...")
+        import subprocess
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"[PasteClipboard] 执行失败 (code {result.returncode}): {result.stderr}")
+            return CustomAction.RunResult(success=False)
+        else:
+            print(f"[PasteClipboard] 发送成功，文本长度: {len(text)}")
+            return CustomAction.RunResult(success=True)
+
+import json
+from maa.agent.agent_server import AgentServer
+from maa.custom_action import CustomAction
+from maa.context import Context
+
+@AgentServer.custom_action("SetRepeat")
+class SetRepeat(CustomAction):
+    """
+    通用 Action：根据用户输入的秒数动态设置指定节点的 repeat 值。
+    
+    custom_action_param 格式：
+    {
+        "seconds": "4.5",          // 用户输入的秒数（字符串或数字）
+        "nodes": [                 // 要修改的节点名称列表
+            "frame_wj_划飞弹",
+            "frame_wj_划飞弹2",
+            ...
+        ],
+        "multiplier": 6.25         // 可选，换算系数，默认 6.25
+    }
+    """
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
+        # 1. 解析参数
+        param = {}
+        if argv.custom_action_param:
+            try:
+                param = json.loads(argv.custom_action_param)
+            except Exception as e:
+                print(f"[SetRepeat] 参数解析失败: {e}")
+                return CustomAction.RunResult(success=False)
+
+        seconds_str = param.get("seconds", "4")
+        nodes = param.get("nodes", [])
+        multiplier = param.get("multiplier", 6.25)
+
+        if not nodes:
+            print("[SetRepeat] 未指定 nodes，跳过")
+            return CustomAction.RunResult(success=True)
+
+        # 2. 换算 repeat 次数
+        try:
+            seconds = float(seconds_str)
+        except ValueError:
+            print(f"[SetRepeat] 无效的秒数: {seconds_str}，使用默认 4 秒")
+            seconds = 4.0
+
+        repeat = int(round(seconds * multiplier))
+        if repeat < 1:
+            repeat = 1
+
+        # 3. 构建 pipeline 覆盖
+        override = {}
+        for node in nodes:
+            override[node] = {"repeat": repeat}
+
+        # 4. 应用覆盖
+        context.override_pipeline(override)
+
+        print(f"[SetRepeat] 已将 {nodes} 的 repeat 设置为 {repeat} (基于 {seconds} 秒，系数 {multiplier})")
         return CustomAction.RunResult(success=True)

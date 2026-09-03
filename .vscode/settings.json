@@ -2,10 +2,10 @@
     "json.schemas": [
         {
             "fileMatch": [
-                "/assets/resource/**/*.json",
-                "/install/resource/**/*.json",
-                "/assets/resource/**/*.jsonc",
-                "/install/resource/**/*.jsonc"
+                "/assets/resource/pipeline/**/*.json",
+                "/install/resource/pipeline/**/*.json",
+                "/assets/resource/pipeline/**/*.jsonc",
+                "/install/resource/pipeline/**/*.jsonc",
             ],
             "url": "/deps/tools/pipeline.schema.json"
         },
@@ -21,6 +21,13 @@
                 "/install/config/maa_pi_config.json"
             ],
             "url": "/deps/tools/interface_config.schema.json"
+        },
+        {
+            "fileMatch": [
+                "/assets/resource/task/**/*.json",
+                "/assets/resource/task/**/*.jsonc"
+            ],
+            "url": "/deps/tools/interface_fragment.schema.json"
         }
     ],
     "files.associations": {

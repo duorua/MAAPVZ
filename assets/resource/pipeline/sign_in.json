@@ -10,7 +10,7 @@
     },
     "执行签到": {
         "recognition": "TemplateMatch",
-        "focus": "执行签到",
+        "focus": "[color:DeepSkyBlue]执行签到[/color]",
         "template": [
             "sign_in/签到.png"
         ],

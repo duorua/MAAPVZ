@@ -38,6 +38,74 @@
                 }
             ]
         },
+        "每次卡双赢的间隔时间": {
+            "type": "input",
+            "description": "越长卡双赢速度越快，但越不稳定",
+            "inputs": [
+                {
+                    "name": "毫秒",
+                    "default": "2000",
+                    "pipeline_type": "int",
+                    "verify": "^[1-9]\\d{0,}$"
+                }
+            ],
+            "pipeline_override": {
+                "打开pvz_自定义包": {
+                    "post_delay": "{毫秒}"
+                },
+                "打开pvz_华为": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_联想": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_360": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_九游": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_OPPO": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_应用宝_qq": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_应用宝_微信": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_b服": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_vivo": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_荣耀": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_好游快报": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_百度": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_7723": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_官服": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_taptap": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_4399": {
+                    "post_delay": "{毫秒}",
+                },
+                "打开pvz_XM": {
+                    "post_delay": "{毫秒}",
+                }
+            }
+        },
         "植物摆位": {
             "type": "select",
             "cases": [
@@ -337,7 +405,7 @@
                     "pipeline_override": {
                         "突发情况处理": {
                             "next": [
-                                "重开",
+                                "失败重开",
                                 "识别成功，启动！",
                                 "判断游戏是否胜利",
                                 "判断游戏是否失败",
@@ -357,7 +425,12 @@
             "default_case": "不停止",
             "cases": [
                 {
-                    "name": "不停止"
+                    "name": "不停止",
+                    "pipeline_override": {
+                        "返回主界面_停止任务": {
+                            "enabled": false
+                        }
+                    }
                 },
                 {
                     "name": "到达大师锅后停止",
@@ -371,7 +444,7 @@
                     "name": "胜利十把后停止",
                     "pipeline_override": {
                         "重开": {
-                            "enabled": false
+                            "enabled": true
                         },
                         "只重开十次": {
                             "enabled": true
